@@ -1,0 +1,27 @@
+# Blok keluaran yang tercetak di Bab 6 (bab06-invers.tex).
+# Diperiksa oleh periksa.py terhadap kode/bab06_*.py.
+
+=== blok 1 ===
+(1) inv(A) = [[0.6, -0.2], [-0.2, 0.4]]
+    rumus 2 x 2 sama: True
+    256 * inv(Xt^T Xt) =
+[[352 -48 -48]
+ [-48  40 -24]
+ [-48 -24  40]]
+    inv(G) @ Xt^T y = [1. 2. 1.]
+
+=== blok 2 ===
+(2) det G: np.linalg.det = 256.0000
+    slogdet: tanda +1, log|det| = 5.5452, exp = 256.0000
+    det P * hasil kali pivot = 256.0000
+    |det| dengan fitur rangkap < 1e-9: True
+
+=== blok 3 ===
+(3) inv(G) x5 = [0.25 0.   0.  ]  x5^T inv(G) x5 = 0.2500
+    Sherman-Morrison sama dengan inv langsung: True
+    w baru (pembaruan) : [1.2 2.  1. ]
+    w baru (dari awal) : [1.2 2.  1. ]
+
+=== blok 4 ===
+(4) 0.1 I (10 x 10)        det = 1.0e-10  cond = 1.0e+00
+(4) [[1, 1], [1, 1.0001]]  det = 1.0e-04  cond = 4.0e+04

@@ -1,0 +1,28 @@
+# Blok keluaran yang tercetak di Bab 7 (bab07-proyeksi.tex).
+# Diperiksa oleh periksa.py terhadap kode/bab07_*.py.
+
+=== blok 1 ===
+(1) 4 H =
+[[ 3  1  1 -1]
+ [ 1  3 -1  1]
+ [ 1 -1  3  1]
+ [-1  1  1  3]]
+    H^2 = H: True   H^T = H: True   trace H = 3.0000
+    H y = [ 4.  9. 11. 16.]
+
+=== blok 2 ===
+(2) sqrt(10) * Q =
+[[ 1.5811 -2.     -1.    ]
+ [ 1.5811 -1.      2.    ]
+ [ 1.5811  1.     -2.    ]
+ [ 1.5811  2.      1.    ]]
+    R =
+[[2.     6.     6.    ]
+ [0.     3.1623 1.8974]
+ [0.     0.     2.5298]]
+    Q^T Q = I: True
+    np.linalg.qr sama sampai tanda: True True
+
+=== blok 3 ===
+(3) Q^T y * sqrt(10) = [63.2456 26.      8.    ]
+    w dari R w = Q^T y: [1. 2. 1.]

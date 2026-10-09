@@ -476,6 +476,89 @@ def bab05_lembah():
     simpan(fig, "bab05-lembah")
 
 
+# ============================ Bab 6 ==================================
+
+def bab06_luas():
+    from matplotlib.patches import Polygon
+    persegi = np.array([[0, 0], [1, 0], [1, 1], [0, 1]], float)
+    kasus = [("persegi satuan, luas 1", np.eye(2), BIRU),
+             ("$\\mathbf{A}$: luas $|\\det\\mathbf{A}| = 5$",
+              np.array([[2, 1], [1, 3]]), HIJAU),
+             ("$\\mathbf{S}$: luas $|\\det\\mathbf{S}| = 0$",
+              np.array([[1, 2], [2, 4]]), MERAH)]
+    fig, ax = plt.subplots(1, 3, figsize=(4.6, 1.9))
+    for a, (judul, M, c) in zip(ax, kasus):
+        Q = persegi @ M.T
+        a.add_patch(Polygon(Q, closed=True, fc=c, alpha=0.18, ec=c,
+                            lw=1.0))
+        _panah(a, (0, 0), M[:, 0], c, "", lw=1.0)
+        _panah(a, (0, 0), M[:, 1], c, "", lw=1.0)
+        a.set_xlim(-0.5, 4.5)
+        a.set_ylim(-0.5, 6.5)
+        a.set_aspect("equal")
+        a.set_title(judul, fontsize=6.5)
+        a.axhline(0, color=ABU_GARIS, lw=0.5)
+        a.axvline(0, color=ABU_GARIS, lw=0.5)
+        _rapikan(a)
+    fig.tight_layout()
+    simpan(fig, "bab06-luas")
+
+
+# ============================ Bab 7 ==================================
+
+def bab07_proyeksi():
+    a, b = np.array([3.0, 1.0]), np.array([1.0, 2.0])
+    pr = (a @ b) / (a @ a) * a
+    fig, ax = plt.subplots(figsize=(2.8, 2.0))
+    t = np.linspace(-0.3, 1.25, 2)
+    ax.plot(t * a[0], t * a[1], color=ABU_GARIS, lw=0.8)
+    _panah(ax, (0, 0), a, BIRU, "$\\mathbf{a}$", 0.05, -0.3)
+    _panah(ax, (0, 0), b, HIJAU, "$\\mathbf{b}$", -0.3, 0.05)
+    _panah(ax, (0, 0), pr, JINGGA, "$\\mathbf{p}$", -0.1, -0.35, lw=1.4)
+    ax.plot(*np.array([pr, b]).T, color=MERAH, lw=0.9, ls="--")
+    ax.text(1.3, 1.25, "$\\mathbf{b} - \\mathbf{p}$", color=MERAH,
+            fontsize=7)
+    u = a / np.linalg.norm(a) * 0.18
+    w = (b - pr) / np.linalg.norm(b - pr) * 0.18
+    q = pr
+    ax.plot([q[0] - u[0], q[0] - u[0] + w[0], q[0] + w[0]],
+            [q[1] - u[1], q[1] - u[1] + w[1], q[1] + w[1]],
+            color=ABU, lw=0.6)
+    ax.set_xlim(-0.3, 3.6)
+    ax.set_ylim(-0.3, 2.4)
+    ax.set_aspect("equal")
+    ax.axhline(0, color=ABU_GARIS, lw=0.5)
+    ax.axvline(0, color=ABU_GARIS, lw=0.5)
+    _rapikan(ax)
+    simpan(fig, "bab07-proyeksi")
+
+
+def bab07_ortogonal():
+    sys.path.insert(0, str(Path(__file__).parent / "kode"))
+    from bab07_proyeksi import gs_klasik, gs_modifikasi
+    t = np.linspace(0, 1, 50)
+    kond, hasil = [], {"klasik": [], "modifikasi": [], "Householder": []}
+    for d in range(2, 15):
+        A = np.vander(t, d, increasing=True)
+        kond.append(np.linalg.cond(A))
+        for nama, f in [("klasik", gs_klasik),
+                        ("modifikasi", gs_modifikasi),
+                        ("Householder", np.linalg.qr)]:
+            Q = f(A)[0]
+            hasil[nama].append(np.linalg.norm(Q.T @ Q - np.eye(d)))
+    fig, ax = plt.subplots(figsize=(3.4, 2.1))
+    for (nama, v), c in zip(hasil.items(), [MERAH, JINGGA, BIRU]):
+        ax.loglog(kond, np.maximum(v, 1e-17), "o-", color=c, ms=2.5,
+                  lw=0.9, label=("Gram\u2013Schmidt " + nama
+                                 if nama != "Householder"
+                                 else "Householder (np.linalg.qr)"))
+    ax.set_xlabel("bilangan kondisi $\\mathbf{A}$")
+    ax.set_ylabel("$\\|\\mathbf{Q}^{\\top}\\mathbf{Q} - \\mathbf{I}\\|$")
+    ax.legend(fontsize=6)
+    _rapikan(ax)
+    simpan(fig, "bab07-ortogonal")
+
+
 # Fungsi gambar baru disisipkan DI ATAS penanda ini.
 
 
