@@ -13,9 +13,20 @@ Xt = rancangan(X)
 print("(1) epsilon mesin float64 = %.4e = 2^-52" % np.finfo(float).eps)
 print("    0.1 + 0.2 == 0.3 :", 0.1 + 0.2 == 0.3,
       "  selisih = %.1e" % (0.1 + 0.2 - 0.3))
-x = X[:, 0] + 1e8                      # x1 digeser 10^8
-v_satu = np.mean(x ** 2) - np.mean(x) ** 2
-v_dua = np.mean((x - x.mean()) ** 2)
+# x1 digeser 10^8. Penjumlahan ditulis berurutan dengan float Python
+# supaya hasilnya sama di setiap komputer; np.sum memakai urutan
+# penjumlahan yang bergantung pada prosesor.
+x = [float(v) + 1e8 for v in X[:, 0]]
+jumlah = jumlah_kuadrat = 0.0
+for v in x:
+    jumlah += v
+    jumlah_kuadrat += v * v
+rata = jumlah / len(x)
+v_satu = jumlah_kuadrat / len(x) - rata ** 2
+v_dua = 0.0
+for v in x:
+    v_dua += (v - rata) ** 2
+v_dua /= len(x)
 print("    varians x1 + 1e8: E[x^2] - E[x]^2 = %.1f" % v_satu)
 print("                      E[(x - xbar)^2] = %.1f" % v_dua)
 
