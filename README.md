@@ -23,6 +23,15 @@ Seluruh kode boleh dipakai, disalin, diubah, dan disebarluaskan secara
 bebas untuk keperluan apa pun, termasuk komersial, tanpa kewajiban
 mencantumkan sumber (lisensi [0BSD](LICENSE)).
 
+Data tidak termasuk lisensi 0BSD. Bab 15 memakai `load_digits` dari
+scikit-learn, salinan data *Optical Recognition of Handwritten Digits*
+(Alpaydin & Kaynak, 1998, UCI Machine Learning Repository,
+[doi:10.24432/C50P49](https://doi.org/10.24432/C50P49)), dengan lisensi
+CC BY 4.0. Bab 12 memakai potret Grace Hopper yang ikut terpasang
+bersama Matplotlib (`grace_hopper.jpg`), foto resmi Angkatan Laut
+Amerika Serikat yang berstatus domain publik. Keduanya tidak disalin ke
+repositori ini; kode memuatnya dari pustaka yang terpasang.
+
 ## Menjalankan
 
 ```bash
