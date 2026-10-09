@@ -726,6 +726,55 @@ def bab10_mahalanobis():
     simpan(fig, "bab10-mahalanobis")
 
 
+# ============================ Bab 11 =================================
+
+def bab11_geometri():
+    M = np.array([[3.0, 0.0], [4.0, 5.0]])
+    U, sv, Vt = np.linalg.svd(M)
+    if U[0, 0] < 0:
+        U[:, 0] *= -1
+        Vt[0] *= -1
+    t = np.linspace(0, 2 * np.pi, 300)
+    C = np.vstack([np.cos(t), np.sin(t)])
+    tahap = [("$\\mathbf{x}$", np.eye(2)),
+             ("$\\mathbf{V}^{\\top}\\mathbf{x}$", Vt),
+             ("$\\Sigma\\mathbf{V}^{\\top}\\mathbf{x}$", np.diag(sv) @ Vt),
+             ("$\\mathbf{U}\\Sigma\\mathbf{V}^{\\top}\\mathbf{x} = "
+              "\\mathbf{M}\\mathbf{x}$", M)]
+    fig, ax = plt.subplots(1, 4, figsize=(4.6, 1.5))
+    for a, (judul, T) in zip(ax, tahap):
+        E = T @ C
+        a.plot(*E, color=BIRU, lw=0.9)
+        for k, c in [(0, HIJAU), (1, JINGGA)]:
+            p = T @ Vt[k]
+            _panah(a, (0, 0), p, c, "", lw=0.9)
+        a.set_xlim(-7.5, 7.5)
+        a.set_ylim(-7.5, 7.5)
+        a.set_aspect("equal")
+        a.set_xticks([])
+        a.set_yticks([])
+        a.set_title(judul, fontsize=6)
+        for sp in a.spines.values():
+            sp.set_color(ABU_GARIS)
+    fig.tight_layout()
+    simpan(fig, "bab11-geometri")
+
+
+def bab11_susut():
+    lam = np.logspace(-1, 3, 200)
+    fig, ax = plt.subplots(figsize=(3.4, 1.9))
+    for sv, c in [(4, BIRU), (2, HIJAU)]:
+        ax.semilogx(lam, sv ** 2 / (sv ** 2 + lam), color=c,
+                    label=f"$\\sigma = {sv}$")
+    ax.axvline(2, color=ABU_GARIS, lw=0.6, ls="--")
+    ax.plot([2, 2], [16 / 18, 4 / 6], "o", color=ABU, ms=3)
+    ax.set_xlabel("$\\lambda$")
+    ax.set_ylabel("$\\sigma^2/(\\sigma^2 + \\lambda)$")
+    ax.legend(fontsize=6.5)
+    _rapikan(ax)
+    simpan(fig, "bab11-susut")
+
+
 # Fungsi gambar baru disisipkan DI ATAS penanda ini.
 
 

@@ -1,0 +1,29 @@
+# Blok keluaran yang tercetak di Bab 11 (bab11-svd.tex).
+# Diperiksa oleh periksa.py terhadap kode/bab11_*.py.
+
+=== blok 1 ===
+(1) nilai singular: [4. 2.]
+    sqrt(2) V^T = [[ 1.  1.]
+ [ 1. -1.]]
+    sqrt(2) U =
+[[-1.  0.]
+ [ 0. -1.]
+ [ 0.  1.]
+ [ 1.  0.]]
+    U S V^T = Xc: True
+
+=== blok 2 ===
+(3) pinv(Xc) yc = [2. 1.]
+    pinv(Xt3) y = [1. 1. 0. 1.]
+    nilai singular Xt3: [16.3488  2.      0.8476  0.    ]
+
+=== blok 3 ===
+(2) nilai singular Xt: [9.5551 2.     0.8373]
+    kondisi Xt      = 11.4124, kuadratnya = 130.2423
+    kondisi Xt^T Xt = 130.2423
+
+=== blok 4 ===
+(4) lambda =  2.0  faktor [0.8889 0.6667]
+    w = [1.6667 1.    ]  sama dengan Bab 8: True
+(4) lambda = 10.0  faktor [0.6154 0.2857]
+    w = [1.0659 0.7802]  sama dengan Bab 8: True
