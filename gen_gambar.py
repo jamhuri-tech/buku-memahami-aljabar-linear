@@ -775,6 +775,54 @@ def bab11_susut():
     simpan(fig, "bab11-susut")
 
 
+# ============================ Bab 12 =================================
+
+def _citra():
+    import matplotlib.cbook as cbook
+    import matplotlib.image as mimage
+    jalur = cbook.get_sample_data("grace_hopper.jpg", asfileobj=False)
+    return mimage.imread(jalur).astype(float).mean(axis=2)
+
+
+def bab12_citra():
+    G = _citra()
+    U, s, Vt = np.linalg.svd(G, full_matrices=False)
+    fig, ax = plt.subplots(1, 4, figsize=(4.6, 1.55))
+    for a, k in zip(ax, [None, 5, 20, 50]):
+        A = G if k is None else (U[:, :k] * s[:k]) @ Vt[:k]
+        a.imshow(A, cmap="gray", vmin=0, vmax=255)
+        a.set_xticks([])
+        a.set_yticks([])
+        a.set_title("asli" if k is None else f"rank {k}", fontsize=6.5)
+        for sp in a.spines.values():
+            sp.set_visible(False)
+    fig.tight_layout()
+    simpan(fig, "bab12-citra")
+
+
+def bab12_singular():
+    s = np.linalg.svd(_citra(), compute_uv=False)
+    fig, ax = plt.subplots(1, 2, figsize=(4.6, 1.9))
+    a = ax[0]
+    a.semilogy(np.arange(1, len(s) + 1), s, color=BIRU, lw=0.9)
+    a.set_xlabel("indeks $k$")
+    a.set_ylabel("$\\sigma_k$")
+    a.set_title("nilai singular citra")
+    _rapikan(a)
+    a = ax[1]
+    e = np.cumsum(s ** 2) / (s ** 2).sum()
+    a.plot(np.arange(1, 101), e[:100], color=HIJAU, lw=1.0)
+    for k in (5, 20, 50):
+        a.plot(k, e[k - 1], "o", color=JINGGA, ms=3)
+    a.set_xlabel("rank $k$")
+    a.set_ylabel("bagian energi")
+    a.set_ylim(0.85, 1.0)
+    a.set_title("energi yang tersimpan")
+    _rapikan(a)
+    fig.tight_layout()
+    simpan(fig, "bab12-singular")
+
+
 # Fungsi gambar baru disisipkan DI ATAS penanda ini.
 
 

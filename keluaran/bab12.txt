@@ -1,0 +1,43 @@
+# Blok keluaran yang tercetak di Bab 12 (bab12-rendah.tex).
+# Diperiksa oleh periksa.py terhadap kode/bab12_*.py.
+
+=== blok 1 ===
+(1) hampiran rank 1 dari Xc =
+[[-2. -2.]
+ [ 0.  0.]
+ [ 0.  0.]
+ [ 2.  2.]]
+    galat Frobenius^2 = 4.0000 = sigma_2^2
+    bagian energi rank 1 = 0.8000
+
+=== blok 2 ===
+(2) skor PCA * sqrt(2) =
+[[-4.  0.]
+ [ 0. -2.]
+ [ 0.  2.]
+ [ 4.  0.]]
+    varians (pembagi m): [4. 1.]
+    explained_variance_ratio_: [0.8 0.2]
+    skor sama dengan sklearn: True
+
+=== blok 3 ===
+(3) citra 600 x 512, 307200 bilangan
+    rank  5:   5565 bilangan ( 1.8%), galat relatif 33.0%
+    rank 20:  22260 bilangan ( 7.2%), galat relatif 18.5%
+    rank 50:  55650 bilangan (18.1%), galat relatif 10.6%
+
+=== blok 4 ===
+(4) skor lengkap R = A B^T (rank 2) =
+[[4 2 0 2 4]
+ [3 1 2 3 4]
+ [2 0 4 4 4]
+ [5 2 2 4 6]
+ [4 1 4 5 6]
+ [2 1 0 1 2]]
+    ramalan ALS untuk skor yang disembunyikan:
+      pengguna 1, film 4: 2.00 (sebenarnya 2)
+      pengguna 2, film 2: 1.00 (sebenarnya 1)
+      pengguna 3, film 1: 2.00 (sebenarnya 2)
+      pengguna 4, film 3: 2.00 (sebenarnya 2)
+      pengguna 5, film 5: 6.00 (sebenarnya 6)
+      pengguna 6, film 3: 0.00 (sebenarnya 0)
