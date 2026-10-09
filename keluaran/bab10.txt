@@ -1,0 +1,33 @@
+# Blok keluaran yang tercetak di Bab 10 (bab10-simetris.tex).
+# Diperiksa oleh periksa.py terhadap kode/bab10_*.py.
+
+=== blok 1 ===
+(1) Q^T Q = I: True   Q Lambda Q^T = S: True
+    jumlah lambda_k q_k q_k^T = [[10.0, 6.0], [6.0, 10.0]]
+
+=== blok 2 ===
+(2) S  nilai eigen [ 4. 16.]
+       definit positif: True
+(2) B  nilai eigen [-1.  3.]
+       definit positif: False
+(2) G  nilai eigen [ 0.701  4.    91.299]
+       definit positif: True
+(2) G3 nilai eigen [  0.       0.7183   4.     267.2817]
+       definit positif: False
+
+=== blok 3 ===
+(3) L =
+[[2.     0.     0.    ]
+ [6.     3.1623 0.    ]
+ [6.     1.8974 2.5298]]
+    L = R^T dari QR (sampai tanda): True
+    w lewat cho_solve: [1. 2. 1.]
+
+=== blok 4 ===
+(4) kovarians = [[2.5, 1.5], [1.5, 2.5]]
+    4 * invers   = [[2.5, -1.5], [-1.5, 2.5]]
+    Mahalanobis^2 ke rata-rata: [2. 2. 2. 2.]
+    Euclid^2 ke rata-rata     : [8. 2. 2. 8.]
+    kovarians sesudah whitening = [[1. 0.]
+ [0. 1.]]
+(5) kovarians 100 000 sampel: [[2.48, 1.5], [1.5, 2.5]]

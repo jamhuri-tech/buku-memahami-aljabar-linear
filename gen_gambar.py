@@ -669,6 +669,63 @@ def bab09_konvergen():
     simpan(fig, "bab09-konvergen")
 
 
+# ============================ Bab 10 =================================
+
+def bab10_kuadrat():
+    t = np.linspace(-2, 2, 201)
+    U, V = np.meshgrid(t, t)
+    kasus = [("definit positif", np.array([[10, 6], [6, 10]]) / 4),
+             ("tak tentu (pelana)", np.array([[1, 2], [2, 1]])),
+             ("semidefinit (lembah)", np.array([[1, 1], [1, 1]]))]
+    fig, ax = plt.subplots(1, 3, figsize=(4.6, 1.75))
+    for a, (judul, A) in zip(ax, kasus):
+        F = A[0, 0] * U ** 2 + 2 * A[0, 1] * U * V + A[1, 1] * V ** 2
+        a.contour(U, V, F, levels=[-6, -3, -1, 0, 1, 3, 6, 10],
+                  colors=[JINGGA] * 3 + [ABU] + [BIRU] * 4,
+                  linewidths=0.7)
+        a.set_title(judul, fontsize=6.5)
+        a.set_aspect("equal")
+        a.set_xticks([-2, 0, 2])
+        a.set_yticks([-2, 0, 2])
+        _rapikan(a)
+    fig.tight_layout()
+    simpan(fig, "bab10-kuadrat")
+
+
+def bab10_mahalanobis():
+    X, _, _ = _mini()
+    Xc = X - X.mean(0)
+    C = Xc.T @ Xc / 4
+    lam, Q = np.linalg.eigh(C)
+    t = np.linspace(0, 2 * np.pi, 200)
+    lingkar = np.vstack([np.cos(t), np.sin(t)])
+    fig, ax = plt.subplots(1, 2, figsize=(4.6, 2.2))
+    a = ax[0]
+    for r, c in [(1, ABU_GARIS), (np.sqrt(2), HIJAU)]:
+        E = Q @ np.diag(np.sqrt(lam)) @ (r * lingkar)
+        a.plot(*(E + X.mean(0)[:, None]), color=c, lw=0.9)
+    a.scatter(*X.T, color=BIRU, s=20, zorder=3)
+    a.plot(*X.mean(0), "*", color=JINGGA, ms=6)
+    a.set_title("elips Mahalanobis $d = 1$, $\\sqrt{2}$")
+    a.set_xlim(-0.5, 6.5)
+    a.set_ylim(-0.5, 6.5)
+    a = ax[1]
+    Z = Xc @ Q / np.sqrt(lam)
+    a.plot(*(np.sqrt(2) * lingkar), color=HIJAU, lw=0.9)
+    a.plot(*lingkar, color=ABU_GARIS, lw=0.9)
+    a.scatter(*Z.T, color=BIRU, s=20, zorder=3)
+    a.set_title("sesudah whitening")
+    a.set_xlim(-2.2, 2.2)
+    a.set_ylim(-2.2, 2.2)
+    for a in ax:
+        a.set_aspect("equal")
+        a.axhline(0 if a is ax[1] else 3, color=ABU_GARIS, lw=0.4)
+        a.axvline(0 if a is ax[1] else 3, color=ABU_GARIS, lw=0.4)
+        _rapikan(a)
+    fig.tight_layout()
+    simpan(fig, "bab10-mahalanobis")
+
+
 # Fungsi gambar baru disisipkan DI ATAS penanda ini.
 
 
