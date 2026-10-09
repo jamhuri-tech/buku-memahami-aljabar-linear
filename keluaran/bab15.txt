@@ -6,7 +6,7 @@
     citra 8 x 8 -> baris 64: piksel (r, c) di kolom 8 r + c
     kolom selalu nol: [0, 32, 39]
     rank X = 61, rank [1 | X] = 62
-    latih 1257, uji 540
+    train 1257, test 540
 
 === blok 2 ===
 (2) rata-rata kelas paling mirip: 1 dan 8, cos = 0.929
@@ -21,7 +21,7 @@
     komponen untuk 90%: 21
 
 === blok 4 ===
-(4) metode                         akurasi uji
+(4) metode                         akurasi test
     kuadrat terkecil, lambda      0  0.9370
     kuadrat terkecil, lambda     10  0.9370
     kuadrat terkecil, lambda    100  0.9352
@@ -32,7 +32,7 @@
     regresi logistik (sklearn)      0.9537
 
 === blok 5 ===
-(5) kolom yang selalu nol di data latih: [0, 32, 39]
+(5) kolom yang selalu nol di data train: [0, 32, 39]
     rank Xc = 61 dari 64 kolom -> Xc^T Xc singular
     sesudah kolom nol dibuang: kondisi Xc = 833.6
                                kondisi Xc^T Xc = 6.95e+05

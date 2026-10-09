@@ -5,7 +5,7 @@ import matplotlib.image as mimage
 import numpy as np
 from sklearn.decomposition import PCA
 
-from bab01_data import BENIH, data_mini
+from bab01_data import SEED, data_mini
 
 np.set_printoptions(precision=4, suppress=True)
 X, y = data_mini()
@@ -58,7 +58,7 @@ hilang = [(0, 3), (1, 1), (2, 0), (3, 2), (4, 4), (5, 2)]
 ada = np.ones_like(R, bool)
 for i, j in hilang:
     ada[i, j] = False
-rng = np.random.default_rng(BENIH)
+rng = np.random.default_rng(SEED)
 P, Q = rng.random((6, 2)), rng.random((5, 2))
 lam = 1e-3
 for _ in range(2000):           # kuadrat terkecil bergantian (ALS)

@@ -6,7 +6,7 @@ from sklearn.datasets import load_digits
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 
-from bab01_data import BENIH
+from bab01_data import SEED
 
 np.set_printoptions(precision=3, suppress=True)
 d = load_digits()
@@ -23,8 +23,8 @@ print("    rank X = %d, rank [1 | X] = %d"
          np.linalg.matrix_rank(np.column_stack([np.ones(m), X]))))
 
 Xl, Xu, yl, yu = train_test_split(X, y, test_size=0.3, stratify=y,
-                                  random_state=BENIH)
-print("    latih %d, uji %d" % (len(yl), len(yu)))
+                                  random_state=SEED)
+print("    train %d, test %d" % (len(yl), len(yu)))
 
 # (2) Kemiripan kosinus antar rata-rata kelas
 M = np.array([Xl[yl == k].mean(0) for k in range(10)])
@@ -74,7 +74,7 @@ def akurasi(model, A, t):
 
 
 Yl = satu_panas(yl)
-print("(4) metode                         akurasi uji")
+print("(4) metode                         akurasi test")
 for lam in (0.0, 10.0, 100.0, 1000.0):
     mdl = latih(Xl, Yl, lam)
     print("    kuadrat terkecil, lambda %6.0f  %.4f"
@@ -89,7 +89,7 @@ print("    regresi logistik (sklearn)      %.4f" % lr.score(Xu, yu))
 # (5) Bilangan kondisi
 Xc = Xl - mu
 hidup = Xl.std(0) > 0
-print("(5) kolom yang selalu nol di data latih:", np.where(~hidup)[0].tolist())
+print("(5) kolom yang selalu nol di data train:", np.where(~hidup)[0].tolist())
 print("    rank Xc = %d dari %d kolom -> Xc^T Xc singular"
       % (np.linalg.matrix_rank(Xc), n))
 s2 = np.linalg.svd(Xc[:, hidup], compute_uv=False)

@@ -7,7 +7,7 @@ fitur mempunyai rata-rata dan ragam yang sama.
 """
 import numpy as np
 
-BENIH = 20261010
+SEED = 20261010
 
 DATA_MINI = np.array([[1, 1, 3],
                       [2, 4, 10],

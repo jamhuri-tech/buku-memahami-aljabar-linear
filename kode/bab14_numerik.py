@@ -1,15 +1,15 @@
-"""Bab 14: bilangan titik mengambang, pembatalan, bilangan kondisi,
-pemusatan, laju gradient descent, dan matriks jarang."""
+"""Bab 14: bilangan floating point, pembatalan, bilangan kondisi,
+pemusatan, laju gradient descent, dan sparse matrix."""
 import numpy as np
 import scipy.sparse as sp
 
-from bab01_data import BENIH, data_mini, rancangan
+from bab01_data import SEED, data_mini, rancangan
 
 np.set_printoptions(precision=4, suppress=True)
 X, y = data_mini()
 Xt = rancangan(X)
 
-# (1) Titik mengambang dan pembatalan
+# (1) Floating point dan pembatalan
 print("(1) epsilon mesin float64 = %.4e = 2^-52" % np.finfo(float).eps)
 print("    0.1 + 0.2 == 0.3 :", 0.1 + 0.2 == 0.3,
       "  selisih = %.1e" % (0.1 + 0.2 - 0.3))
@@ -59,9 +59,9 @@ print("    iterasi GD (eta = 0.02) sampai loss < minimum + 1e-6:")
 print("      asli %d, terpusat %d" % (iterasi_gd(Xt, 0.02),
                                        iterasi_gd(Xtc, 0.02)))
 
-# (4) Matriks jarang
+# (4) Sparse matrix
 n = 10000
-rng = np.random.default_rng(BENIH)
+rng = np.random.default_rng(SEED)
 baris = np.repeat(np.arange(n), 5)
 kolom = rng.integers(0, n, size=5 * n)
 S = sp.csr_matrix((np.ones(5 * n), (baris, kolom)), shape=(n, n))

@@ -4,7 +4,7 @@ PDF vektor untuk cetak dan PNG 300 dpi untuk EPUB.
 
 Satu fungsi per gambar, dinamai babNN_nama(), yang memanggil
 simpan(fig, "babNN-nama"). Fungsi bernama babNN_* dijalankan otomatis.
-Benih acak selalu tetap, supaya gambar tidak berubah setiap build.
+Seed selalu tetap, supaya gambar tidak berubah setiap build.
 """
 import re
 import sys
@@ -15,7 +15,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
-BENIH = 20261010  # sama dengan seluruh kode/bab*.py
+SEED = 20261010  # sama dengan seluruh kode/bab*.py
 GBR = Path("gbr")
 
 # Sebagian gambar memakai kelas yang sudah ditulis di kode/, supaya
@@ -247,7 +247,7 @@ def bab02_bola():
 
 
 def bab02_jarak():
-    from bab01_data import data_mini, BENIH
+    from bab01_data import data_mini, SEED
     X, _ = data_mini()
     fig, ax = plt.subplots(1, 2, figsize=(4.6, 2.1))
     a = ax[0]
@@ -271,7 +271,7 @@ def bab02_jarak():
     a.set_title("jarak Euclid kuadrat")
     _rapikan(a)
     a = ax[1]
-    rng = np.random.default_rng(BENIH)
+    rng = np.random.default_rng(SEED)
     for d, c in [(2, ABU), (100, HIJAU), (10000, BIRU)]:
         A = rng.standard_normal((2000, d))
         B = rng.standard_normal((2000, d))
@@ -856,8 +856,8 @@ def bab13_graf():
         ax.annotate("", xy=(x0 + 0.87, 1.6), xytext=(x1 - 0.87, 1.6),
                     arrowprops=dict(arrowstyle="-|>", color=MERAH,
                                     lw=0.7, mutation_scale=6))
-    ax.text(0.1, 3.3, "maju: nilai", color=HIJAU, fontsize=6.5)
-    ax.text(0.1, 0.3, "mundur: turunan $L$ terhadap setiap simpul",
+    ax.text(0.1, 3.3, "forward pass: nilai", color=HIJAU, fontsize=6.5)
+    ax.text(0.1, 0.3, "backward pass: turunan $L$ terhadap setiap simpul",
             color=MERAH, fontsize=6.5)
     simpan(fig, "bab13-graf")
 
@@ -906,10 +906,10 @@ def bab14_presisi():
 def _digits():
     from sklearn.datasets import load_digits
     from sklearn.model_selection import train_test_split
-    from bab01_data import BENIH
+    from bab01_data import SEED
     d = load_digits()
     return train_test_split(d.data, d.target, test_size=0.3,
-                            stratify=d.target, random_state=BENIH)
+                            stratify=d.target, random_state=SEED)
 
 
 def bab15_contoh():

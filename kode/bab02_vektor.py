@@ -3,7 +3,7 @@ antarsampel, dicocokkan dengan NumPy dan SciPy."""
 import numpy as np
 from scipy.spatial.distance import cdist
 
-from bab01_data import BENIH, data_mini
+from bab01_data import SEED, data_mini
 
 np.set_printoptions(precision=4, suppress=True)
 X, y = data_mini()
@@ -36,7 +36,7 @@ print("    jarak Manhattan:")
 print(cdist(X, X, "cityblock").astype(int))
 
 # (4) Kosinus dua vektor acak pada dimensi tinggi
-rng = np.random.default_rng(BENIH)
+rng = np.random.default_rng(SEED)
 print("(4) dimensi  rata-rata |cos|  simpangan baku cos")
 for d in (2, 10, 100, 1000, 10000):
     A = rng.standard_normal((2000, d))

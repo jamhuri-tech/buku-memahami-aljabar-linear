@@ -42,7 +42,7 @@ python3 -m venv .venv
 .venv/bin/python kode/bab01_matriks.py
 ```
 
-Pembangkit bilangan acak selalu memakai benih tetap (20261010),
+Random number generator selalu memakai seed tetap (20261010),
 sehingga keluarannya sama setiap kali dijalankan.
 
 ## Memeriksa angka di buku

@@ -4,7 +4,7 @@ import numpy as np
 from scipy.linalg import cho_factor, cho_solve
 from scipy.spatial.distance import mahalanobis
 
-from bab01_data import BENIH, data_mini, rancangan
+from bab01_data import SEED, data_mini, rancangan
 
 np.set_printoptions(precision=4, suppress=True)
 X, y = data_mini()
@@ -59,7 +59,7 @@ print("    kovarians sesudah whitening =",
       np.round(Z.T @ Z / len(X), 10) + 0.0)
 
 # (5) Membangkitkan sampel normal dengan Cholesky
-rng = np.random.default_rng(BENIH)
+rng = np.random.default_rng(SEED)
 Lc = np.linalg.cholesky(C)
 sampel = rng.standard_normal((100000, 2)) @ Lc.T + X.mean(0)
 K = np.cov(sampel.T, bias=True)
