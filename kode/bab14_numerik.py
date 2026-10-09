@@ -22,7 +22,7 @@ for v in x:
     jumlah += v
     jumlah_kuadrat += v * v
 rata = jumlah / len(x)
-v_satu = jumlah_kuadrat / len(x) - rata ** 2
+v_satu = jumlah_kuadrat / len(x) - rata * rata   # bukan rata ** 2: pow libm
 v_dua = 0.0
 for v in x:
     v_dua += (v - rata) ** 2
