@@ -188,12 +188,12 @@ def bab02_operasi():
         a.text(q[0] + dx, q[1] + dy, teks, color=c, fontsize=7)
 
     a = ax[0]
-    panah(a, (0, 0), u, BIRU, "$\\mathbf{u} = (3, 1)$", -0.2, -0.45)
-    panah(a, (0, 0), v, HIJAU, "$\\mathbf{v} = (1, 2)$", -1.0, 0.15)
+    panah(a, (0, 0), u, BIRU, "$\\mathbf{u} = (3\\;\\;1)^\\top$", -0.2, -0.45)
+    panah(a, (0, 0), v, HIJAU, "$\\mathbf{v} = (1\\;\\;2)^\\top$", -1.0, 0.15)
     panah(a, u, u + v, HIJAU, "", lw=0.6)
     panah(a, v, u + v, BIRU, "", lw=0.6)
     panah(a, (0, 0), u + v, JINGGA,
-          "$\\mathbf{u} + \\mathbf{v} = (4, 3)$", -1.2, 0.2)
+          "$\\mathbf{u} + \\mathbf{v} = (4\\;\\;3)^\\top$", -1.2, 0.2)
     panah(a, (0, 0), 2 * v, ABU, "$2\\mathbf{v}$", 0.1, 0.0, lw=0.6)
     a.set_title("penjumlahan dan perkalian skalar")
     a.set_xlim(-0.3, 5)
@@ -201,7 +201,7 @@ def bab02_operasi():
     a = ax[1]
     panah(a, (0, 0), u, BIRU, "$\\mathbf{u}$", 0.1, -0.35)
     panah(a, (0, 0), v, HIJAU, "$\\mathbf{v}$", 0.05, 0.1)
-    panah(a, (0, 0), w, MERAH, "$\\mathbf{w} = (-1, 3)$", -0.9, 0.15)
+    panah(a, (0, 0), w, MERAH, "$\\mathbf{w} = (-1\\;\\;3)^\\top$", -0.9, 0.15)
     t = np.linspace(np.arctan2(1, 3), np.arctan2(2, 1), 30)
     a.plot(0.8 * np.cos(t), 0.8 * np.sin(t), color=ABU, lw=0.7)
     a.text(0.9, 0.75, "$45^\\circ$", fontsize=6.5, color=ABU)
