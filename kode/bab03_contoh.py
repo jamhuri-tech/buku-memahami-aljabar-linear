@@ -54,4 +54,25 @@ assert np.isclose(ev.max(), 1)
 assert np.isclose(abs(math.degrees(math.atan(u[1] / u[0]))), 22.5)
 N = 2000
 assert (N ** 3 + N ** 2) // (2 * N ** 2) == 1000
+# prosa: contoh 2 x 2
+A = np.array([[2, 1], [1, 3]])
+B = np.array([[1, 2], [0, 1]])
+x = np.array([1, 2])
+assert (A @ x).tolist() == [4, 7]
+assert (1 * A[:, 0] + 2 * A[:, 1]).tolist() == [4, 7]
+assert (A @ [1, 0]).tolist() == [2, 1]
+assert (A @ B).tolist() == [[2, 5], [1, 5]]
+assert (B @ x).tolist() == [5, 2] and (A @ [5, 2]).tolist() == [12, 11]
+assert (A @ B @ x).tolist() == [12, 11]
+assert (A @ B[:, 1]).tolist() == [5, 5] and (A[0] @ B).tolist() == [2, 5]
+assert (np.outer(A[:, 0], B[0]) + np.outer(A[:, 1], B[1])).tolist() == \
+    (A @ B).tolist()
+assert np.outer(A[:, 0], B[0]).tolist() == [[2, 4], [1, 2]]
+assert np.outer(A[:, 1], B[1]).tolist() == [[0, 1], [0, 3]]
+assert np.outer([1, 2, 3], [4, 5]).tolist() == [[4, 5], [8, 10], [12, 15]]
+assert (B @ A).tolist() == [[4, 7], [1, 3]]
+assert (A @ B).T.tolist() == (B.T @ A.T).tolist() == [[2, 1], [5, 5]]
+assert (A.T @ B.T).tolist() == [[4, 1], [7, 3]]
+assert (A == A.T).all() and not (B == B.T).all()
+assert (X.T @ X).tolist() == [[46, 42], [42, 46]]
 print("Contoh Soal Bab 3: semua bilangan cocok")

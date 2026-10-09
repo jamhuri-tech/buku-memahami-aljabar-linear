@@ -176,6 +176,51 @@ def bab01_turun():
 
 # ============================ Bab 2 ==================================
 
+def bab02_operasi():
+    u, v, w = np.array([3, 1]), np.array([1, 2]), np.array([-1, 3])
+    fig, ax = plt.subplots(1, 2, figsize=(4.6, 2.3))
+
+    def panah(a, p, q, c, teks, dx=0.1, dy=0.1, lw=1.1):
+        a.annotate("", xy=q, xytext=p,
+                   arrowprops=dict(arrowstyle="-|>", color=c, lw=lw,
+                                   shrinkA=0, shrinkB=0,
+                                   mutation_scale=7))
+        a.text(q[0] + dx, q[1] + dy, teks, color=c, fontsize=7)
+
+    a = ax[0]
+    panah(a, (0, 0), u, BIRU, "$\\mathbf{u} = (3, 1)$", -0.2, -0.45)
+    panah(a, (0, 0), v, HIJAU, "$\\mathbf{v} = (1, 2)$", -1.0, 0.15)
+    panah(a, u, u + v, HIJAU, "", lw=0.6)
+    panah(a, v, u + v, BIRU, "", lw=0.6)
+    panah(a, (0, 0), u + v, JINGGA,
+          "$\\mathbf{u} + \\mathbf{v} = (4, 3)$", -1.2, 0.2)
+    panah(a, (0, 0), 2 * v, ABU, "$2\\mathbf{v}$", 0.1, 0.0, lw=0.6)
+    a.set_title("penjumlahan dan perkalian skalar")
+    a.set_xlim(-0.3, 5)
+    a.set_ylim(-0.3, 4.5)
+    a = ax[1]
+    panah(a, (0, 0), u, BIRU, "$\\mathbf{u}$", 0.1, -0.35)
+    panah(a, (0, 0), v, HIJAU, "$\\mathbf{v}$", 0.05, 0.1)
+    panah(a, (0, 0), w, MERAH, "$\\mathbf{w} = (-1, 3)$", -0.9, 0.15)
+    t = np.linspace(np.arctan2(1, 3), np.arctan2(2, 1), 30)
+    a.plot(0.8 * np.cos(t), 0.8 * np.sin(t), color=ABU, lw=0.7)
+    a.text(0.9, 0.75, "$45^\\circ$", fontsize=6.5, color=ABU)
+    q = 0.35 * u / np.linalg.norm(u)
+    r = 0.35 * w / np.linalg.norm(w)
+    a.plot([q[0], q[0] + r[0], r[0]], [q[1], q[1] + r[1], r[1]],
+           color=ABU, lw=0.6)
+    a.set_title("sudut dan tegak lurus")
+    a.set_xlim(-1.6, 3.6)
+    a.set_ylim(-0.3, 3.6)
+    for a in ax:
+        a.axhline(0, color=ABU_GARIS, lw=0.5)
+        a.axvline(0, color=ABU_GARIS, lw=0.5)
+        a.set_aspect("equal")
+        _rapikan(a)
+    fig.tight_layout()
+    simpan(fig, "bab02-operasi")
+
+
 def bab02_bola():
     t = np.linspace(0, 2 * np.pi, 400)
     fig, ax = plt.subplots(figsize=(2.6, 2.4))

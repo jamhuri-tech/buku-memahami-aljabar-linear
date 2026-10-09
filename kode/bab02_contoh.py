@@ -54,4 +54,18 @@ assert 2 + 50 - 20 == 32
 assert np.isclose(X.std(axis=0), math.sqrt(10 / 4)).all()
 Z = (X - X.mean(0)) / X.std(0)
 assert np.allclose((Z ** 2).sum(0), 4)
+# prosa: contoh dua dimensi u = (3, 1), v = (1, 2), w = (-1, 3)
+u, v2, w = np.array([3, 1]), np.array([1, 2]), np.array([-1, 3])
+assert (u + v2).tolist() == [4, 3] and (2 * v2).tolist() == [2, 4]
+assert (2 * u - v2).tolist() == [5, 0]
+assert u @ v2 == 5 and u @ w == 0
+assert u @ u == 10 and np.abs(u).sum() == 4 and np.abs(u).max() == 3
+assert round(math.sqrt(10), 2) == 3.16 and v2 @ v2 == 5
+assert round(math.sqrt(50), 2) == 7.07
+assert np.isclose(5 / math.sqrt(50), 1 / math.sqrt(2))
+assert np.isclose(math.degrees(math.acos(5 / math.sqrt(50))), 45)
+e = v2 / math.sqrt(5)
+assert np.allclose(e.round(3), [0.447, 0.894])
+d = X[1] - X[2]
+assert d.tolist() == [-2, 2] and d @ d == 8 and np.abs(d).sum() == 4
 print("Contoh Soal Bab 2: semua bilangan cocok")
