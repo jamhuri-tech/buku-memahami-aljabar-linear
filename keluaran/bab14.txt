@@ -1,0 +1,25 @@
+# Blok keluaran yang tercetak di Bab 14 (bab14-numerik.tex).
+# Diperiksa oleh periksa.py terhadap kode/bab14_*.py.
+
+=== blok 1 ===
+(1) epsilon mesin float64 = 2.2204e-16 = 2^-52
+    0.1 + 0.2 == 0.3 : False   selisih = 5.6e-17
+    varians x1 + 1e8: E[x^2] - E[x]^2 = 4.0
+                      E[(x - xbar)^2] = 2.5
+
+=== blok 2 ===
+(2) b = [2.0, 2.0001] -> x = [1. 1.]
+(2) b = [2.0, 2.0002] -> x = [0. 2.]
+    kondisi A = 40002
+
+=== blok 3 ===
+(3) asli            kondisi =    11.41
+(3) terpusat        kondisi =     2.00
+(3) x1 dalam menit  kondisi =   482.11
+    iterasi GD (eta = 0.02) sampai loss < minimum + 1e-6:
+      asli 780, terpusat 226
+
+=== blok 4 ===
+(4) 10000 x 10000, 49986 unsur tak nol
+    padat :   800000000 byte
+    CSR   :      639836 byte (0.080%)

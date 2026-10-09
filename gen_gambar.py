@@ -862,6 +862,45 @@ def bab13_graf():
     simpan(fig, "bab13-graf")
 
 
+# ============================ Bab 14 =================================
+
+def bab14_presisi():
+    t = np.linspace(0, 1, 50)
+    kond, galat = [], {k: [] for k in ("persamaan normal + inv",
+                                         "persamaan normal + solve",
+                                         "QR", "lstsq (SVD)")}
+    for d in range(2, 16):
+        V = np.vander(t, d, increasing=True)
+        w = np.ones(d)
+        yv = V @ w
+        kond.append(np.linalg.cond(V))
+        G, c = V.T @ V, V.T @ yv
+        Q, R = np.linalg.qr(V)
+        hasil = [np.linalg.inv(G) @ c, np.linalg.solve(G, c),
+                 np.linalg.solve(R, Q.T @ yv),
+                 np.linalg.lstsq(V, yv, rcond=None)[0]]
+        for k, h in zip(galat, hasil):
+            galat[k].append(max(np.linalg.norm(h - w) / np.linalg.norm(w),
+                                1e-17))
+    fig, ax = plt.subplots(figsize=(3.6, 2.2))
+    for (k, v), c, mk in zip(galat.items(), [MERAH, JINGGA, HIJAU, BIRU],
+                             ["o", "s", "^", "v"]):
+        ax.loglog(kond, v, mk + "-", color=c, ms=2.5, lw=0.8, label=k)
+    kk = np.array(kond)
+    ax.loglog(kk, 1.1e-16 * kk, ":", color=ABU, lw=0.7)
+    ax.loglog(kk, 1.1e-16 * kk ** 2, "--", color=ABU, lw=0.7)
+    ax.text(kk[-4], 1.1e-16 * kk[-4] * 3, "$\\epsilon\\kappa$", fontsize=6.5,
+            color=ABU)
+    ax.text(kk[5], 1.1e-16 * kk[5] ** 2 * 4, "$\\epsilon\\kappa^2$",
+            fontsize=6.5, color=ABU)
+    ax.set_xlabel("bilangan kondisi $\\kappa(\\mathbf{V})$")
+    ax.set_ylabel("galat relatif bobot")
+    ax.set_ylim(1e-17, 1e2)
+    ax.legend(fontsize=5.5, loc="upper left")
+    _rapikan(ax)
+    simpan(fig, "bab14-presisi")
+
+
 # Fungsi gambar baru disisipkan DI ATAS penanda ini.
 
 
