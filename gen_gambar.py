@@ -559,6 +559,57 @@ def bab07_ortogonal():
     simpan(fig, "bab07-ortogonal")
 
 
+# ============================ Bab 8 ==================================
+
+def bab08_cocok():
+    X, y, Xt = _mini()
+    w = np.linalg.solve(Xt.T @ Xt, Xt.T @ y)
+    yh = Xt @ w
+    fig, ax = plt.subplots(1, 2, figsize=(4.6, 2.1))
+    a = ax[0]
+    a.plot([2, 17], [2, 17], color=ABU_GARIS, lw=0.8)
+    for u, v in zip(yh, y):
+        a.plot([u, u], [u, v], color=MERAH, lw=0.9)
+    a.scatter(yh, y, color=BIRU, s=20, zorder=3)
+    a.axhline(10, color=ABU, lw=0.5, ls=":")
+    a.text(2.3, 10.4, "$\\bar{y} = 10$", fontsize=6.5, color=ABU)
+    a.set_xlabel("ramalan $\\hat{y}$")
+    a.set_ylabel("target $y$")
+    a.set_title("galat: garis merah")
+    a.set_aspect("equal")
+    _rapikan(a)
+    a = ax[1]
+    bag = [78, 74, 4]
+    a.bar([0, 1, 2], bag, color=[ABU, BIRU, MERAH], width=0.6)
+    for i, v in enumerate(bag):
+        a.text(i, v + 1.5, str(v), ha="center", fontsize=7, color=ABU)
+    a.set_xticks([0, 1, 2], ["SST", "SSR", "SSE"])
+    kunci_label(a, "x")
+    a.set_ylim(0, 90)
+    a.set_title("SST = SSR + SSE")
+    _rapikan(a)
+    fig.tight_layout()
+    simpan(fig, "bab08-cocok")
+
+
+def bab08_ridge():
+    X, y, _ = _mini()
+    Xc, yc = X - X.mean(0), y - y.mean()
+    lam = np.logspace(-2, 3, 200)
+    W = np.array([np.linalg.solve(Xc.T @ Xc + l * np.eye(2), Xc.T @ yc)
+                  for l in lam])
+    fig, ax = plt.subplots(figsize=(3.4, 2.0))
+    ax.semilogx(lam, W[:, 0], color=BIRU, label="$w_1$")
+    ax.semilogx(lam, W[:, 1], color=HIJAU, label="$w_2$")
+    ax.axvline(2, color=ABU_GARIS, lw=0.6, ls="--")
+    ax.text(2.3, 2.05, "$\\lambda = 2$", fontsize=6.5, color=ABU)
+    ax.set_xlabel("$\\lambda$")
+    ax.set_ylabel("bobot ridge")
+    ax.legend(fontsize=6.5)
+    _rapikan(ax)
+    simpan(fig, "bab08-ridge")
+
+
 # Fungsi gambar baru disisipkan DI ATAS penanda ini.
 
 
