@@ -823,6 +823,45 @@ def bab12_singular():
     simpan(fig, "bab12-singular")
 
 
+# ============================ Bab 13 =================================
+
+def bab13_graf():
+    fig, ax = plt.subplots(figsize=(4.6, 1.9))
+    ax.set_xlim(-0.2, 10.2)
+    ax.set_ylim(0, 3.6)
+    ax.axis("off")
+    simpul = [(0.8, "$\\mathbf{x}$", "$(2\\;\\;4)^\\top$"),
+              (2.9, "$\\mathbf{z} = \\mathbf{W}_1\\mathbf{x}$",
+               "$(-2\\;\\;6)^\\top$"),
+              (5.0, "$\\mathbf{a} = \\mathrm{ReLU}(\\mathbf{z})$",
+               "$(0\\;\\;6)^\\top$"),
+              (7.1, "$\\hat{y} = \\mathbf{w}_2^\\top\\mathbf{a}$", "$6$"),
+              (9.2, "$L = (\\hat{y} - y)^2$", "$16$")]
+    mundur = ["", "$(0\\;\\;-8)^\\top$", "$(-8\\;\\;-8)^\\top$", "$-8$",
+              "$1$"]
+    for (x, nama, nilai), g in zip(simpul, mundur):
+        ax.add_patch(plt.Rectangle((x - 0.85, 1.35), 1.7, 0.9,
+                                   fc=BIRU_MUDA, ec=BIRU, lw=0.7))
+        ax.text(x, 1.8, nama, ha="center", va="center", fontsize=6,
+                color=BIRU)
+        ax.text(x, 2.65, nilai, ha="center", va="center", fontsize=6,
+                color=HIJAU)
+        if g:
+            ax.text(x, 0.9, g, ha="center", va="center", fontsize=6,
+                    color=MERAH)
+    for (x0, *_), (x1, *_) in zip(simpul[:-1], simpul[1:]):
+        ax.annotate("", xy=(x1 - 0.87, 1.95), xytext=(x0 + 0.87, 1.95),
+                    arrowprops=dict(arrowstyle="-|>", color=HIJAU,
+                                    lw=0.7, mutation_scale=6))
+        ax.annotate("", xy=(x0 + 0.87, 1.6), xytext=(x1 - 0.87, 1.6),
+                    arrowprops=dict(arrowstyle="-|>", color=MERAH,
+                                    lw=0.7, mutation_scale=6))
+    ax.text(0.1, 3.3, "maju: nilai", color=HIJAU, fontsize=6.5)
+    ax.text(0.1, 0.3, "mundur: turunan $L$ terhadap setiap simpul",
+            color=MERAH, fontsize=6.5)
+    simpan(fig, "bab13-graf")
+
+
 # Fungsi gambar baru disisipkan DI ATAS penanda ini.
 
 

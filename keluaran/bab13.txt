@@ -1,0 +1,27 @@
+# Blok keluaran yang tercetak di Bab 13 (bab13-kalkulus.tex).
+# Diperiksa oleh periksa.py terhadap kode/bab13_*.py.
+
+=== blok 1 ===
+(1) grad w^T A w: rumus [  2. -11.]  beda hingga [  2. -11.]
+    grad L(0, 2, 1): rumus       [-2. -6. -6.]
+                     beda hingga [-2. -6. -6.]
+
+=== blok 2 ===
+(2) y lulus = [0. 0. 1. 1.]
+    gradien di w = 0: rumus       [ 0.   -0.75 -0.25]
+                      beda hingga [ 0.   -0.75 -0.25]
+    16 * Hessian =
+[[ 4. 12. 12.]
+ [12. 46. 42.]
+ [12. 42. 46.]]
+    langkah Newton: w = [-3.   1.5 -0.5] loss 0.6931 -> 0.1269
+
+=== blok 3 ===
+(3) z = [-2.  6.]  a = [0. 6.]  yhat = 6.0
+    dL/dW1 = [[0.0, 0.0], [-16.0, -32.0]]  dL/db1 = [ 0. -8.]
+    dL/dw2 = [  0. -48.]
+    dL/dW1 beda hingga: [[0.0, 0.0], [-16.0, -32.0]]
+
+=== blok 4 ===
+(4) d log det / dA: rumus [[0.6, -0.2], [-0.2, 0.4]]
+    beda hingga          [[0.6, -0.2], [-0.2, 0.4]]
