@@ -350,6 +350,132 @@ def bab03_ubah():
     simpan(fig, "bab03-ubah")
 
 
+# ============================ Bab 4 ==================================
+
+def _panah(a, p, q, c, teks="", dx=0.1, dy=0.1, lw=1.1):
+    a.annotate("", xy=q, xytext=p,
+               arrowprops=dict(arrowstyle="-|>", color=c, lw=lw,
+                               shrinkA=0, shrinkB=0, mutation_scale=7))
+    if teks:
+        a.text(q[0] + dx, q[1] + dy, teks, color=c, fontsize=7)
+
+
+def bab04_gambar():
+    fig, ax = plt.subplots(1, 2, figsize=(4.6, 2.3))
+    a = ax[0]
+    t = np.linspace(-0.5, 4, 50)
+    a.plot(t, 4 - 2 * t, color=BIRU, label="$2x_1 + x_2 = 4$")
+    a.plot(t, (7 - t) / 3, color=HIJAU, label="$x_1 + 3x_2 = 7$")
+    a.plot(1, 2, "o", color=JINGGA, ms=4, zorder=3)
+    a.text(1.15, 2.15, "$(1, 2)$", color=JINGGA, fontsize=7)
+    a.set_xlim(-0.5, 4)
+    a.set_ylim(-0.5, 4)
+    a.set_xlabel("$x_1$")
+    a.set_ylabel("$x_2$")
+    a.set_title("gambar baris: dua garis")
+    a.legend(fontsize=6, loc="upper right")
+    a = ax[1]
+    a1, a2 = np.array([2, 1]), np.array([1, 3])
+    _panah(a, (0, 0), a1, BIRU, "kolom 1", 0.05, -0.5)
+    _panah(a, a1, a1 + 2 * a2, HIJAU, "", lw=0.8)
+    _panah(a, (0, 0), a2, HIJAU, "kolom 2", -1.3, 0.1)
+    _panah(a, (0, 0), a1 + 2 * a2, JINGGA, "$\\mathbf{b}$", 0.1, 0.0)
+    a.text(2.6, 4.0, "$2 \\times$ kolom 2", color=HIJAU, fontsize=6.5)
+    a.set_xlim(-1.5, 5)
+    a.set_ylim(-0.5, 7.5)
+    a.set_title("gambar kolom: kombinasi kolom")
+    for a in ax:
+        a.axhline(0, color=ABU_GARIS, lw=0.5)
+        a.axvline(0, color=ABU_GARIS, lw=0.5)
+        a.set_aspect("equal")
+        _rapikan(a)
+    fig.tight_layout()
+    simpan(fig, "bab04-gambar")
+
+
+def bab04_jenis():
+    fig, ax = plt.subplots(1, 3, figsize=(4.6, 1.7))
+    t = np.linspace(-0.5, 3, 20)
+    kasus = [("tepat satu", [(2, 1, 4), (1, 3, 7)]),
+             ("tidak ada", [(1, 1, 2), (1, 1, 3)]),
+             ("tak hingga", [(1, 1, 2), (2, 2, 4)])]
+    for a, (judul, garis) in zip(ax, kasus):
+        for (p, q, r), c, gaya in zip(garis, [BIRU, HIJAU], ["-", "--"]):
+            a.plot(t, (r - p * t) / q, color=c, ls=gaya, lw=1.2)
+        if judul == "tepat satu":
+            a.plot(1, 2, "o", color=JINGGA, ms=3.5)
+        a.set_xlim(-0.5, 3)
+        a.set_ylim(-0.5, 3.5)
+        a.set_xticks([0, 1, 2, 3])
+        a.set_yticks([0, 1, 2, 3])
+        a.set_title(judul + " solusi")
+        a.set_aspect("equal")
+        _rapikan(a)
+    fig.tight_layout()
+    simpan(fig, "bab04-jenis")
+
+
+# ============================ Bab 5 ==================================
+
+def bab05_rentang():
+    u, v = np.array([3, 1]), np.array([1, 2])
+    fig, ax = plt.subplots(1, 2, figsize=(4.6, 2.3))
+    a = ax[0]
+    t = np.linspace(-1.6, 1.6, 2)
+    a.plot(t * u[0], t * u[1], color=BIRU, lw=1.0)
+    for c in np.arange(-1.5, 1.51, 0.5):
+        a.plot(c * u[0], c * u[1], "o", color=BIRU, ms=2.5)
+    _panah(a, (0, 0), u, JINGGA, "$\\mathbf{u}$", 0.1, -0.5)
+    a.set_title("rentang satu vektor: garis")
+    a = ax[1]
+    for c1 in np.arange(-1.5, 1.51, 0.5):
+        for c2 in np.arange(-1.5, 1.51, 0.5):
+            q = c1 * u + c2 * v
+            a.plot(*q, "o", color=ABU_GARIS, ms=2.0)
+    for c in np.arange(-1.5, 1.51, 0.5):
+        a.plot(*np.array([c * u - 1.5 * v, c * u + 1.5 * v]).T,
+               color=ABU_GARIS, lw=0.4)
+        a.plot(*np.array([c * v - 1.5 * u, c * v + 1.5 * u]).T,
+               color=ABU_GARIS, lw=0.4)
+    _panah(a, (0, 0), u, BIRU, "$\\mathbf{u}$", 0.1, -0.5)
+    _panah(a, (0, 0), v, HIJAU, "$\\mathbf{v}$", -0.6, 0.1)
+    a.set_title("rentang dua vektor: bidang")
+    for a in ax:
+        a.axhline(0, color=ABU_GARIS, lw=0.5)
+        a.axvline(0, color=ABU_GARIS, lw=0.5)
+        a.set_xlim(-5, 5)
+        a.set_ylim(-4, 4)
+        a.set_aspect("equal")
+        _rapikan(a)
+    fig.tight_layout()
+    simpan(fig, "bab05-rentang")
+
+
+def bab05_lembah():
+    X, y, _ = _mini()
+    X3 = np.column_stack([np.ones(4), X, X.sum(1)])
+    w = np.array([1.0, 2, 1, 0])
+    n = np.array([0.0, 1, 1, -1])
+    d = np.array([0.0, 1, 0, 0])
+    t = np.linspace(-2, 2, 200)
+    L = lambda v: np.mean((y - X3 @ v) ** 2)
+    fig, ax = plt.subplots(figsize=(3.4, 1.9))
+    ax.plot(t, [L(w + s * n) for s in t], color=BIRU,
+            label="arah ruang nol $(0\\;\\;1\\;\\;1\\;\\;-1)^\\top$")
+    ax.plot(t, [L(w + s * d) for s in t], color=JINGGA,
+            label="arah $w_1$ saja $(0\\;\\;1\\;\\;0\\;\\;0)^\\top$")
+    for s, c in [(0, ABU), (-1, HIJAU)]:
+        ax.plot(s, 1, "o", color=c, ms=3.5, zorder=3)
+    ax.text(-1.05, 1.9, "norma\nminimum", color=HIJAU, fontsize=6,
+            ha="center")
+    ax.set_xlabel("langkah $t$ dari $\\mathbf{w} = (1\\;\\;2\\;\\;1\\;\\;0)^\\top$")
+    ax.set_ylabel("loss $L$")
+    ax.set_ylim(0, 12)
+    ax.legend(fontsize=6, loc="center right")
+    _rapikan(ax)
+    simpan(fig, "bab05-lembah")
+
+
 # Fungsi gambar baru disisipkan DI ATAS penanda ini.
 
 

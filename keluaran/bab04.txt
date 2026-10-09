@@ -1,0 +1,35 @@
+# Blok keluaran yang tercetak di Bab 4 (bab04-sistem.tex).
+# Diperiksa oleh periksa.py terhadap kode/bab04_*.py.
+
+=== blok 1 ===
+(1) eliminasi buatan sendiri: [1. 2. 1.]
+    np.linalg.solve          : [1. 2. 1.]
+
+=== blok 2 ===
+(2) L =
+[[1.  0.  0. ]
+ [3.  1.  0. ]
+ [3.  0.6 1. ]]
+    U =
+[[ 4.  12.  12. ]
+ [ 0.  10.   6. ]
+ [ 0.   0.   6.4]]
+
+=== blok 3 ===
+(3) tiga ruas kanan, satu LU:
+[[1. 2. 1.]
+ [2. 4. 2.]
+ [2. 2. 1.]]
+
+=== blok 4 ===
+(4) tanpa pivot : [0. 1.]
+    dengan pivot: [1. 1.]
+    np.linalg   : [1. 1.]
+
+=== blok 5 ===
+(5) SciPy menukar baris, P =
+[[0 0 1]
+ [1 0 0]
+ [0 1 0]]
+    L U = A: True   P L2 U2 = A: True
+    solusi: [1. 2. 1.]
