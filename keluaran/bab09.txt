@@ -1,0 +1,31 @@
+# Blok keluaran yang tercetak di Bab 9 (bab09-eigen.tex).
+# Diperiksa oleh periksa.py terhadap kode/bab09_*.py.
+
+=== blok 1 ===
+(1) S = Xc^T Xc, nilai eigen: [ 4. 16.]
+    vektor eigen (kolom) * sqrt(2):
+[[ 1.  1.]
+ [-1.  1.]]
+    nilai eigen Xt^T Xt: [ 0.701  4.    91.299]
+    46 -+ 6 sqrt(57)   : [ 0.701 91.299]
+
+=== blok 2 ===
+(2) k   x_k (dinormalkan)    hasil bagi Rayleigh
+    1   [0.8575 0.5145]   15.2941
+    2   [0.7498 0.6616]   15.9533
+    3   [0.7181 0.696 ]   15.9971
+    4   [0.7099 0.7043]   15.9998
+    5   [0.7078 0.7064]   16.0000
+    6   [0.7073 0.7069]   16.0000
+
+=== blok 3 ===
+(3) nilai eigen P: [1.  0.4]  stasioner: [0.8333 0.1667]
+    P^20 =
+[[0.8333 0.8333]
+ [0.1667 0.1667]]
+    PageRank (iterasi): [0.3725 0.1958 0.3941 0.0375]
+    PageRank (eig)    : [0.3725 0.1958 0.3941 0.0375]
+
+=== blok 4 ===
+(4) faktor teori 1 - 2 eta lambda / m: [0.993 0.96  0.087]
+    rasio galat terukur (t = 10 / 9)  : [0.993 0.96  0.087]

@@ -610,6 +610,65 @@ def bab08_ridge():
     simpan(fig, "bab08-ridge")
 
 
+# ============================ Bab 9 ==================================
+
+def bab09_elips():
+    S = np.array([[10.0, 6.0], [6.0, 10.0]]) / 4
+    t = np.linspace(0, 2 * np.pi, 300)
+    C = np.vstack([np.cos(t), np.sin(t)])
+    E = S @ C
+    fig, ax = plt.subplots(figsize=(2.8, 2.6))
+    ax.plot(*C, color=ABU_GARIS, lw=0.8)
+    ax.plot(*E, color=BIRU, lw=1.0)
+    v1 = np.array([1, 1]) / np.sqrt(2)
+    v2 = np.array([1, -1]) / np.sqrt(2)
+    _panah(ax, (0, 0), v1, HIJAU, "", lw=1.0)
+    _panah(ax, (0, 0), 4 * v1, HIJAU, "$4\\,\\mathbf{v}_1$", 0.1, 0.0,
+           lw=0.6)
+    _panah(ax, (0, 0), v2, JINGGA, "", lw=1.0)
+    _panah(ax, (0, 0), 1 * v2, JINGGA, "$\\mathbf{v}_2$", 0.05, -0.35,
+           lw=0.6)
+    x = np.array([1.0, 0.0])
+    _panah(ax, (0, 0), x, MERAH, "", lw=0.9)
+    _panah(ax, (0, 0), S @ x, MERAH, "$\\frac{1}{4}\\mathbf{S}\\mathbf{u}_1$",
+           0.05, -0.4, lw=0.6)
+    ax.set_xlim(-3.3, 3.6)
+    ax.set_ylim(-3.3, 3.6)
+    ax.set_aspect("equal")
+    ax.axhline(0, color=ABU_GARIS, lw=0.5)
+    ax.axvline(0, color=ABU_GARIS, lw=0.5)
+    _rapikan(ax)
+    simpan(fig, "bab09-elips")
+
+
+def bab09_konvergen():
+    S = np.array([[10.0, 6.0], [6.0, 10.0]])
+    P = np.array([[0.9, 0.5], [0.1, 0.5]])
+    v1 = np.array([1, 1]) / np.sqrt(2)
+    x = np.array([1.0, 0.0])
+    k = np.arange(1, 16)
+    sudut, markov = [], []
+    for i in k:
+        x = S @ x
+        x /= np.linalg.norm(x)
+        sudut.append(abs(x[0] - x[1]) / np.sqrt(2))   # sin sudut
+        markov.append(np.abs(np.linalg.matrix_power(P, i)
+                             - np.array([[5, 5], [1, 1]]) / 6).max())
+    fig, ax = plt.subplots(figsize=(3.4, 2.0))
+    ax.semilogy(k, sudut, "o-", color=BIRU, ms=2.5,
+                label="iterasi pangkat: sudut ke $\\mathbf{v}_1$")
+    ax.semilogy(k, 0.6 * 0.25 ** k, ":", color=BIRU, lw=0.8,
+                label="$\\propto (4/16)^k$")
+    ax.semilogy(k, markov, "s-", color=JINGGA, ms=2.5,
+                label="Markov: galat $\\mathbf{P}^k$")
+    ax.semilogy(k, 0.5 * 0.4 ** k, ":", color=JINGGA, lw=0.8,
+                label="$\\propto 0{,}4^k$")
+    ax.set_xlabel("langkah $k$")
+    ax.legend(fontsize=5.5)
+    _rapikan(ax)
+    simpan(fig, "bab09-konvergen")
+
+
 # Fungsi gambar baru disisipkan DI ATAS penanda ini.
 
 
