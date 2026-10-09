@@ -901,6 +901,87 @@ def bab14_presisi():
     simpan(fig, "bab14-presisi")
 
 
+# ============================ Bab 15 =================================
+
+def _digits():
+    from sklearn.datasets import load_digits
+    from sklearn.model_selection import train_test_split
+    from bab01_data import BENIH
+    d = load_digits()
+    return train_test_split(d.data, d.target, test_size=0.3,
+                            stratify=d.target, random_state=BENIH)
+
+
+def bab15_contoh():
+    Xl, Xu, yl, yu = _digits()
+    fig, ax = plt.subplots(2, 10, figsize=(4.6, 1.15))
+    for k in range(10):
+        contoh = Xl[yl == k][0]
+        rata = Xl[yl == k].mean(0)
+        for a, v in [(ax[0, k], contoh), (ax[1, k], rata)]:
+            a.imshow(v.reshape(8, 8), cmap="gray_r", vmin=0, vmax=16)
+            a.set_xticks([])
+            a.set_yticks([])
+            for sp in a.spines.values():
+                sp.set_visible(False)
+        ax[0, k].set_title(str(k), fontsize=6.5)
+    ax[0, 0].set_ylabel("contoh", fontsize=6)
+    ax[1, 0].set_ylabel("rata-rata", fontsize=6)
+    fig.tight_layout(pad=0.2)
+    simpan(fig, "bab15-contoh")
+
+
+def bab15_pca():
+    Xl, Xu, yl, yu = _digits()
+    mu = Xl.mean(0)
+    U, s, Vt = np.linalg.svd(Xl - mu, full_matrices=False)
+    Z = (Xl - mu) @ Vt[:2].T
+    fig, ax = plt.subplots(1, 2, figsize=(4.6, 2.2))
+    a = ax[0]
+    peta = plt.get_cmap("tab10")
+    for k in range(10):
+        a.scatter(*Z[yl == k].T, s=2, color=peta(k), alpha=0.6)
+        a.text(*np.median(Z[yl == k], 0), str(k), fontsize=7,
+               fontweight="bold", color="black", ha="center",
+               va="center")
+    a.set_xlabel("komponen 1")
+    a.set_ylabel("komponen 2")
+    a.set_title("skor dua komponen utama")
+    _rapikan(a)
+    a = ax[1]
+    e = np.cumsum(s ** 2) / np.sum(s ** 2)
+    a.plot(np.arange(1, len(e) + 1), e, color=BIRU)
+    a.axhline(0.9, color=ABU_GARIS, lw=0.6, ls="--")
+    a.plot(21, e[20], "o", color=JINGGA, ms=3)
+    a.text(24, 0.84, "21 komponen: 90%", fontsize=6.5, color=JINGGA)
+    a.set_xlabel("banyak komponen $k$")
+    a.set_ylabel("proporsi varians")
+    a.set_title("proporsi varians kumulatif")
+    _rapikan(a)
+    fig.tight_layout()
+    simpan(fig, "bab15-pca")
+
+
+def bab15_rekonstruksi():
+    Xl, Xu, yl, yu = _digits()
+    mu = Xl.mean(0)
+    U, s, Vt = np.linalg.svd(Xl - mu, full_matrices=False)
+    x = Xu[yu == 3][0]
+    ks = [0, 2, 5, 10, 20, 40, 64]
+    fig, ax = plt.subplots(1, len(ks), figsize=(4.6, 0.95))
+    for a, k in zip(ax, ks):
+        z = (x - mu) @ Vt[:k].T
+        r = x if k == 64 else mu + z @ Vt[:k]
+        a.imshow(r.reshape(8, 8), cmap="gray_r", vmin=0, vmax=16)
+        a.set_xticks([])
+        a.set_yticks([])
+        a.set_title("asli" if k == 64 else f"$k = {k}$", fontsize=6)
+        for sp in a.spines.values():
+            sp.set_visible(False)
+    fig.tight_layout(pad=0.2)
+    simpan(fig, "bab15-rekonstruksi")
+
+
 # Fungsi gambar baru disisipkan DI ATAS penanda ini.
 
 
