@@ -31,7 +31,7 @@ nT = nT / nT[1]
 print("    ruang nol Xt^T dibentang", rapi(nT))
 
 # (3) Bobot berbeda, ramalan sama
-for w in ([1, 2, 1, 0], [1, 1, 0, 1], [1, 3, 2, -1]):
+for w in ([5, 10, 5, 0], [5, 5, 0, 5], [5, 15, 10, -5]):
     w = np.array(w, float)
     print("(3) w =", w, " yhat", Xt3 @ w,
           "|w| %.4f" % np.linalg.norm(w))

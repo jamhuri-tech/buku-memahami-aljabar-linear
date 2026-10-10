@@ -38,11 +38,11 @@ assert np.allclose(M @ v1, np.array([3, 9]) / r2)
 assert np.allclose(M @ v1 / (3 * math.sqrt(5)), np.array([1, 3]) / math.sqrt(10))
 
 # Contoh Soal 11.3: kuadrat terkecil lewat SVD
-assert np.isclose(u1 @ yc, 12 / r2) and np.isclose(u2 @ yc, 2 / r2)
-w = (12 / r2 / 4) * v1 + (2 / r2 / 2) * v2
-assert np.allclose(w, [2, 1])
-assert np.allclose((3 / r2) * v1, [1.5, 1.5]) and np.allclose((1 / r2) * v2,
-                                                              [0.5, -0.5])
+assert np.isclose(u1 @ yc, 60 / r2) and np.isclose(u2 @ yc, 10 / r2)
+w = (60 / r2 / 4) * v1 + (10 / r2 / 2) * v2
+assert np.allclose(w, [10, 5])
+assert np.allclose((15 / r2) * v1, [7.5, 7.5])
+assert np.allclose((5 / r2) * v2, [2.5, -2.5])
 
 # bilangan kondisi
 s = np.linalg.svd(rancangan(X), compute_uv=False)
@@ -53,7 +53,7 @@ assert round(s[0] / s[2], 2) == 11.41 and round((s[0] / s[2]) ** 2, 1) == 130.2
 
 # Contoh Soal 11.4: ridge lewat SVD
 assert Fr(16, 18) == Fr(8, 9) and Fr(4, 6) == Fr(2, 3)
-w2 = Fr(8, 9) * Fr(3, 2) * np.array([1, 1]) + Fr(2, 3) * Fr(1, 2) * np.array([1, -1])
-assert list(w2) == [Fr(5, 3), 1]
-assert Fr(4, 3) - Fr(1, 3) == 1
+w2 = Fr(8, 9) * Fr(15, 2) * np.array([1, 1]) + Fr(2, 3) * Fr(5, 2) * np.array([1, -1])
+assert list(w2) == [Fr(25, 3), 5]
+assert Fr(20, 3) - Fr(5, 3) == 5
 print("Contoh Soal Bab 11: semua bilangan cocok")

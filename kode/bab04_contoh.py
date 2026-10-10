@@ -11,7 +11,7 @@ A = [[Fr(int(v)) for v in r] for r in Xt.T @ Xt]
 b = [Fr(int(v)) for v in Xt.T @ y.astype(int)]
 assert [[int(v) for v in r] for r in A] == [[4, 12, 12], [12, 46, 42],
                                             [12, 42, 46]]
-assert b == [40, 146, 142]
+assert b == [200, 730, 710]
 
 # sistem 2 x 2 dan gambar kolom
 A2 = np.array([[2, 1], [1, 3]])
@@ -24,16 +24,16 @@ l21, l31 = M[1][0] / M[0][0], M[2][0] / M[0][0]
 assert l21 == l31 == 3
 M[1] = [a - l21 * c for a, c in zip(M[1], M[0])]
 M[2] = [a - l31 * c for a, c in zip(M[2], M[0])]
-assert M[1] == [0, 10, 6, 26] and M[2] == [0, 6, 10, 22]
+assert M[1] == [0, 10, 6, 130] and M[2] == [0, 6, 10, 110]
 l32 = M[2][1] / M[1][1]
 assert l32 == Fr(3, 5)
-assert [l32 * c for c in M[1]] == [0, 6, Fr(18, 5), Fr(78, 5)]
+assert [l32 * c for c in M[1]] == [0, 6, Fr(18, 5), 78]
 M[2] = [a - l32 * c for a, c in zip(M[2], M[1])]
-assert M[2] == [0, 0, Fr(32, 5), Fr(32, 5)]
+assert M[2] == [0, 0, Fr(32, 5), 32]
 w2 = M[2][3] / M[2][2]
 w1 = (M[1][3] - M[1][2] * w2) / M[1][1]
 w0 = (M[0][3] - M[0][1] * w1 - M[0][2] * w2) / M[0][0]
-assert (w0, w1, w2) == (1, 2, 1)
+assert (w0, w1, w2) == (5, 10, 5)
 
 # Persamaan E21 A dan LU
 E21 = np.array([[1, 0, 0], [-3, 1, 0], [0, 0, 1]])
@@ -50,8 +50,9 @@ assert [3 * u + Fr(3, 5) * v + z for u, v, z in zip(*U)] == [12, 42, 46]
 c1 = b[0]
 c2 = b[1] - 3 * c1
 c3 = b[2] - 3 * c1 - Fr(3, 5) * c2
-assert (c1, c2, c3) == (40, 26, Fr(32, 5)) and 22 - Fr(78, 5) == Fr(32, 5)
-assert (26 - 6) / 10 == 2 and (40 - 24 - 12) / 4 == 1
+assert (c1, c2, c3) == (200, 130, 32) and 110 - 78 == 32
+assert Fr(32) / Fr(32, 5) == 5
+assert (130 - 30) / 10 == 10 and (200 - 120 - 60) / 4 == 5
 
 # Contoh Soal 4.3: pivot dan banyaknya solusi
 P = np.array([[0, 1], [1, 0]])
@@ -69,5 +70,5 @@ assert (B2 @ [-1, 1]).tolist() == [0, 0]
 assert 1 - 1e20 == -1e20 and 2 - 1e20 == -1e20
 w_2y = np.linalg.solve(Xt.T @ Xt, Xt.T @ (2 * y))
 w_y1 = np.linalg.solve(Xt.T @ Xt, Xt.T @ (y + 1))
-assert np.allclose(w_2y, [2, 4, 2]) and np.allclose(w_y1, [2, 2, 1])
+assert np.allclose(w_2y, [10, 20, 10]) and np.allclose(w_y1, [6, 10, 5])
 print("Contoh Soal Bab 4: semua bilangan cocok")

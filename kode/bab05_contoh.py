@@ -33,19 +33,21 @@ assert np.linalg.matrix_rank(Xt) == 3 and np.linalg.matrix_rank(Xt3) == 3
 assert 3 + 1 == 4
 
 # Contoh Soal 5.3: bobot berbeda, ramalan sama, norma minimum
-wp = np.array([1, 2, 1, 0])
-for t in (-1, 1):
-    assert (Xt3 @ (wp + t * n)).tolist() == [4, 9, 11, 16]
-assert (wp - n).tolist() == [1, 1, 0, 1] and (wp + n).tolist() == [1, 3, 2, -1]
-assert Xt3[1] @ [1, 1, 0, 1] == 9 and Xt3[1] @ [1, 3, 2, -1] == 9
-assert wp @ n == 3 and n @ n == 3 and Fr(-3, 3) == -1
-wm = wp - n
-assert wm @ n == 0 and wm @ wm == 3 and wp @ wp == 6
-assert round(np.sqrt(3), 4) == 1.7321 and round(np.sqrt(6), 4) == 2.4495
+wp = np.array([5, 10, 5, 0])
+for t in (-5, 5):
+    assert (Xt3 @ (wp + t * n)).tolist() == [20, 45, 55, 80]
+assert (wp - 5 * n).tolist() == [5, 5, 0, 5]
+assert (wp + 5 * n).tolist() == [5, 15, 10, -5]
+assert Xt3[1] @ [5, 5, 0, 5] == 45 and Xt3[1] @ [5, 15, 10, -5] == 45
+assert wp @ n == 15 and n @ n == 3 and Fr(-15, 3) == -5
+wm = wp - 5 * n
+assert wm @ n == 0 and wm @ wm == 75 and wp @ wp == 150
+assert round(np.sqrt(75), 4) == 8.6603 and round(np.sqrt(150), 4) == 12.2474
 assert np.allclose(np.linalg.lstsq(Xt3, y, rcond=None)[0], wm)
 
 # Contoh Soal 5.4: empat ruang fundamental
-e = np.array([-1, 1, 1, -1])
+e = np.array([-5, 5, 5, -5])
+assert (y - Xt @ [5, 10, 5]).tolist() == e.tolist()
 assert (Xt.T @ e).tolist() == [0, 0, 0]
 assert [int(r @ n) for r in Xt3] == [0, 0, 0, 0]
 for A, dims in [(Xt, (3, 1, 3, 0)), (Xt3, (3, 1, 3, 1))]:

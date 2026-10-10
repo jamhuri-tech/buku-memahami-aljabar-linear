@@ -8,8 +8,9 @@ akan menandai kode yang tepat dipakai untuk mencetak edisi pertama.
 Buku ini memakai satu **data mini** dari awal sampai akhir: empat
 mahasiswa dengan dua fitur, x1 = jam belajar mandiri (1, 2, 4, 5) dan
 x2 = jam belajar kelompok (1, 4, 2, 5), dan target y = skor kuis
-(3, 10, 12, 15) di kolom terakhir. Kuadrat terkecil dengan konstanta
-memberi bobot tepat w = (1, 2, 1) dengan galat (−1, 1, 1, −1), dan data
+(15, 50, 60, 75) pada skala 0-100 di kolom terakhir. Kuadrat terkecil
+dengan konstanta memberi bobot tepat w = (5, 10, 5) dengan galat
+(−5, 5, 5, −5), dan data
 terpusat mempunyai nilai singular tepat 4 dan 2, sehingga LU, QR,
 nilai eigen, dan SVD dapat dihitung tangan. File `kode/babNN_contoh.py`
 memeriksa setiap bilangan di kotak Contoh Soal Bab NN.

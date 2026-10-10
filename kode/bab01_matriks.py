@@ -33,13 +33,13 @@ def gradien(w):
     return -2 / m * Xt.T @ (y - Xt @ w)
 
 
-print("(3) w            loss      gradien")
-for w in ([0, 2, 1], [1, 2, 1]):
+print("(3) w              loss      gradien")
+for w in ([0, 10, 5], [5, 10, 5]):
     w = np.array(w, float)
-    print("    %-12s %-9.4f %s" % (w, loss(w), gradien(w)))
+    print("    %-14s %-9.4f %s" % (w, loss(w), gradien(w)))
 
 # (4) Gradien rumus lawan beda hingga terpusat
-w = np.array([0.0, 2.0, 1.0])
+w = np.array([0.0, 10.0, 5.0])
 h = 1e-6
 fd = np.array([(loss(w + h * e) - loss(w - h * e)) / (2 * h)
                for e in np.eye(3)])

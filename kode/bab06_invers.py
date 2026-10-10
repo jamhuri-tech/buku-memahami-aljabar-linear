@@ -38,7 +38,7 @@ print("    |det| dengan fitur rangkap < 1e-9:",
       abs(np.linalg.det(Xt3.T @ Xt3)) < 1e-9)
 
 # (3) Sherman-Morrison: menambah sampel kelima
-x5, y5 = np.array([1.0, 3.0, 3.0]), 11.0
+x5, y5 = np.array([1.0, 3.0, 3.0]), 55.0
 Gi = np.linalg.inv(G)
 u = Gi @ x5
 Gi_baru = Gi - np.outer(u, u) / (1 + x5 @ u)

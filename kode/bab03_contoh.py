@@ -37,10 +37,11 @@ assert S[0][1] / S[0][0] == Fr(3, 5)
 # Contoh Soal 3.4: ganti fitur
 F = X @ W
 assert F.tolist() == [[2, 0], [6, -2], [6, 2], [10, 0]]
-v = np.linalg.solve(W, [2, 1])
-assert np.allclose(v, [1.5, 0.5])
+v = np.linalg.solve(W, [10, 5])
+assert np.allclose(v, [7.5, 2.5])
 assert 1 + Fr(3, 2) * 6 + Fr(1, 2) * 2 == 11 == 1 + 2 * 4 + 2
-assert np.allclose(1 + X @ [2, 1], 1 + F @ v)
+assert np.allclose(5 + X @ [10, 5], 5 + F @ v)
+assert 5 + 7.5 * 6 + 2.5 * 2 == 55 == 5 + 40 + 10
 
 # prosa: X X^T, sudut cermin 22,5 derajat, biaya
 K = X @ X.T

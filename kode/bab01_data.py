@@ -1,7 +1,7 @@
 """Data mini yang dipakai di seluruh buku.
 
 Empat mahasiswa, dua fitur dan satu target: x1 = jam belajar mandiri
-per hari, x2 = jam belajar kelompok per hari, y = skor kuis (0-20).
+per hari, x2 = jam belajar kelompok per hari, y = skor kuis (0-100).
 Kolom x2 adalah kolom x1 dengan sampel 2 dan 3 bertukar, sehingga kedua
 fitur mempunyai rata-rata dan ragam yang sama.
 """
@@ -9,10 +9,10 @@ import numpy as np
 
 SEED = 20261010
 
-DATA_MINI = np.array([[1, 1, 3],
-                      [2, 4, 10],
-                      [4, 2, 12],
-                      [5, 5, 15]], dtype=float)
+DATA_MINI = np.array([[1, 1, 15],
+                      [2, 4, 50],
+                      [4, 2, 60],
+                      [5, 5, 75]], dtype=float)
 
 
 def data_mini():

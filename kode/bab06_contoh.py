@@ -33,8 +33,8 @@ assert M[0] == [1, 0, Fr(3, 5), Fr(-1, 5)]
 GiG = [[sum(Gi[i][k] * int(G[k][j]) for k in range(3)) for j in range(3)]
        for i in range(3)]
 assert GiG == [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
-assert 352 * 40 - 48 * 146 - 48 * 142 == 256
-assert 14080 - 7008 - 6816 == 256
+assert 352 * 200 - 48 * 730 - 48 * 710 == 1280 == 5 * 256
+assert 70400 - 35040 - 34080 == 1280
 
 # determinan: W, S, A, dan G
 assert int(round(np.linalg.det([[1, 1], [1, -1]]))) == -2
@@ -63,9 +63,9 @@ G2 = G + np.outer(x, x)
 assert np.allclose(np.array(Gi2, float), np.linalg.inv(G2))
 u2 = [sum(Gi2[i][k] * x[k] for k in range(3)) for i in range(3)]
 assert u2 == [Fr(1, 5), 0, 0]
-assert 1 + 2 * 3 + 3 == 10
-w2 = [a + b * (11 - 10) for a, b in zip([1, 2, 1], u2)]
-assert w2 == [Fr(6, 5), 2, 1]
+assert 5 + 10 * 3 + 5 * 3 == 50
+w2 = [a + b * (55 - 50) for a, b in zip([5, 10, 5], u2)]
+assert w2 == [6, 10, 5]
 
 # prosa: determinan dan kondisi
 assert np.isclose(0.1 ** 10, 1e-10)

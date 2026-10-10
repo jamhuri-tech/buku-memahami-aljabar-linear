@@ -13,8 +13,8 @@
     U S V^T = Xc: True
 
 === blok 2 ===
-(3) pinv(Xc) yc = [2. 1.]
-    pinv(Xt3) y = [1. 1. 0. 1.]
+(3) pinv(Xc) yc = [10.  5.]
+    pinv(Xt3) y = [5. 5. 0. 5.]
     nilai singular Xt3: [16.3488  2.      0.8476  0.    ]
 
 === blok 3 ===
@@ -24,6 +24,6 @@
 
 === blok 4 ===
 (4) lambda =  2.0  faktor [0.8889 0.6667]
-    w = [1.6667 1.    ]  sama dengan Bab 8: True
+    w = [8.3333 5.    ]  sama dengan Bab 8: True
 (4) lambda = 10.0  faktor [0.6154 0.2857]
-    w = [1.0659 0.7802]  sama dengan Bab 8: True
+    w = [5.3297 3.9011]  sama dengan Bab 8: True

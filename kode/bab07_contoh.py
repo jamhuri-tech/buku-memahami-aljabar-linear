@@ -18,7 +18,7 @@ assert np.allclose(P @ b, [1.5, 0.5]) and np.allclose(b - P @ b, [-0.5, 1.5])
 assert np.isclose(a @ (b - P @ b), 0)
 assert (np.outer(a, a) @ np.outer(a, a)).tolist() == [[90, 30], [30, 10]]
 assert np.allclose(P @ P, P)
-assert yi.sum() == 40 and (yi - 10).tolist() == [-7, 0, 2, 5]
+assert yi.sum() == 200 and (yi - 50).tolist() == [-35, 0, 10, 25]
 
 # Contoh Soal 7.2: matriks topi
 e = np.array([-1, 1, 1, -1])
@@ -27,8 +27,9 @@ assert H4.astype(int).tolist() == [[3, 1, 1, -1], [1, 3, -1, 1],
                                    [1, -1, 3, 1], [-1, 1, 1, 3]]
 H = Xt @ np.linalg.solve(Xt.T @ Xt, Xt.T)
 assert np.allclose(H, H4 / 4) and np.isclose(np.trace(H), 3)
-assert (3 * 3 + 10 + 12 - 15) == 16
-assert np.allclose(H @ y, [4, 9, 11, 16])
+assert (3 * 15 + 50 + 60 - 75) == 80
+assert np.allclose(H @ y, [20, 45, 55, 80])
+assert np.allclose(y - H @ y, 5 * e)
 
 # rotasi dan W / sqrt(2)
 W = np.array([[1, 1], [1, -1]]) / math.sqrt(2)
@@ -59,10 +60,11 @@ assert round(3 * math.sqrt(10) / 5, 4) == 1.8974
 assert round(4 * math.sqrt(10) / 5, 4) == 2.5298
 
 # Contoh Soal 7.4: kuadrat terkecil lewat QR
-assert np.isclose(q1 @ y, 20)
-assert -6 - 10 + 12 + 30 == 26 and -3 + 20 - 24 + 15 == 8
-assert Fr(8 * 5, 4 * 10) == 1 and (26 - 6) / 10 == 2 and (20 - 12 - 6) / 2 == 1
-assert np.allclose(np.linalg.solve(R, Q.T @ y), [1, 2, 1])
-assert round(20 * math.sqrt(10), 4) == 63.2456
+assert np.isclose(q1 @ y, 100)
+assert -30 - 50 + 60 + 150 == 130 and -15 + 100 - 120 + 75 == 40
+assert Fr(40 * 5, 4 * 10) == 5 and (130 - 30) / 10 == 10
+assert (100 - 60 - 30) / 2 == 5
+assert np.allclose(np.linalg.solve(R, Q.T @ y), [5, 10, 5])
+assert round(100 * math.sqrt(10), 4) == 316.2278
 assert np.allclose(Q @ Q.T, H)
 print("Contoh Soal Bab 7: semua bilangan cocok")

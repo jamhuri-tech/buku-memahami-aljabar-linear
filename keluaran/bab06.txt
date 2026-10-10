@@ -8,7 +8,7 @@
 [[352 -48 -48]
  [-48  40 -24]
  [-48 -24  40]]
-    inv(G) @ Xt^T y = [1. 2. 1.]
+    inv(G) @ Xt^T y = [ 5. 10.  5.]
 
 === blok 2 ===
 (2) det G: np.linalg.det = 256.0000
@@ -19,8 +19,8 @@
 === blok 3 ===
 (3) inv(G) x5 = [0.25 0.   0.  ]  x5^T inv(G) x5 = 0.2500
     Sherman-Morrison sama dengan inv langsung: True
-    w baru (pembaruan) : [1.2 2.  1. ]
-    w baru (dari awal) : [1.2 2.  1. ]
+    w baru (pembaruan) : [ 6. 10.  5.]
+    w baru (dari awal) : [ 6. 10.  5.]
 
 === blok 4 ===
 (4) 0.1 I (10 x 10)        det = 1.0e-10  cond = 1.0e+00

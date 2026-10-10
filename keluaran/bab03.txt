@@ -22,7 +22,7 @@
 
 === blok 3 ===
 (3) X W = [[2, 0], [6, -2], [6, 2], [10, 0]]
-    bobot baru untuk (t, d): [1.5 0.5]
+    bobot baru untuk (t, d): [7.5 2.5]
     ramalan sama: True
 
 === blok 4 ===

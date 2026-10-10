@@ -17,7 +17,7 @@
 (3) terpusat        kondisi =     2.00
 (3) x1 dalam menit  kondisi =   482.11
     iterasi GD (eta = 0.02) sampai loss < minimum + 1e-6:
-      asli 780, terpusat 226
+      asli 1009, terpusat 266
 
 === blok 4 ===
 (4) 10000 x 10000, 49986 unsur tak nol

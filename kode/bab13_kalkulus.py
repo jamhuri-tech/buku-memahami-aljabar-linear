@@ -34,12 +34,12 @@ w = np.array([1.0, -2.0])
 print("(1) grad w^T A w: rumus", r((A + A.T) @ w),
       " beda hingga", r(beda_hingga(lambda v: v @ A @ v, w)))
 L = lambda v: np.sum((y - Xt @ v) ** 2) / m
-w = np.array([0.0, 2.0, 1.0])
-print("    grad L(0, 2, 1): rumus      ", r(-2 / m * Xt.T @ (y - Xt @ w)))
-print("                     beda hingga", r(beda_hingga(L, w)))
+w = np.array([0.0, 10.0, 5.0])
+print("    grad L(0, 10, 5): rumus      ", r(-2 / m * Xt.T @ (y - Xt @ w)))
+print("                      beda hingga", r(beda_hingga(L, w)))
 
-# (2) Regresi logistik: lulus bila skor >= 11
-yb = (y >= 11).astype(float)
+# (2) Regresi logistik: lulus bila skor >= 55
+yb = (y >= 55).astype(float)
 sig = lambda t: 1 / (1 + np.exp(-t))
 
 
@@ -64,7 +64,7 @@ print("    langkah Newton: w =", r(w1), "loss %.4f -> %.4f"
 # (3) Propagasi balik jaringan 2-2-1 dengan ReLU, sampel 2
 W1 = np.array([[1.0, -1.0], [1.0, 1.0]])
 b1 = np.zeros(2)
-w2 = np.array([1.0, 1.0])
+w2 = np.array([5.0, 5.0])
 b2 = 0.0
 x, t = X[1], y[1]
 
@@ -82,7 +82,8 @@ g_a = d * w2
 g_z = g_a * (z > 0)
 g_W1, g_b1 = np.outer(g_z, x), g_z
 print("(3) z =", r(z), " a =", r(a), " yhat = %.1f" % yh)
-print("    dL/dW1 =", r(g_W1).tolist(), " dL/db1 =", r(g_b1))
+print("    dL/dW1 =", r(g_W1).tolist())
+print("    dL/db1 =", r(g_b1))
 print("    dL/dw2 =", r(g_w2))
 fd = beda_hingga(lambda V: (maju(V, b1, w2, b2)[2] - t) ** 2, W1)
 print("    dL/dW1 beda hingga:", r(fd).tolist())

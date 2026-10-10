@@ -14,29 +14,29 @@ assert Xi[2, 1] == 2
 assert list(Xi[[0, 2, 1, 3], 0]) == list(Xi[:, 1])
 
 # Contoh Soal 1.1: rata-rata dan pemusatan
-assert Xi[:, 0].sum() == 12 and Xi[:, 1].sum() == 12 and yi.sum() == 40
+assert Xi[:, 0].sum() == 12 and Xi[:, 1].sum() == 12 and yi.sum() == 200
 Xc = Xi - 3
 assert Xc.tolist() == [[-2, -2], [-1, 1], [1, -1], [2, 2]]
 assert (Xc.sum(0) == 0).all() and (Xc ** 2).sum(0).tolist() == [10, 10]
 
-# Contoh Soal 1.2: satu sampel, w = (0, 2, 1)
-w = np.array([0, 2, 1])
+# Contoh Soal 1.2: satu sampel, w = (0, 10, 5)
+w = np.array([0, 10, 5])
 x2 = Xt[1].astype(int)
 assert x2.tolist() == [1, 2, 4]
 yh = x2 @ w
-assert yh == 8 and yi[1] - yh == 2 and (yi[1] - yh) ** 2 == 4
-g = -2 * 2 * x2
-assert g.tolist() == [-4, -8, -16]
+assert yh == 40 and yi[1] - yh == 10 and (yi[1] - yh) ** 2 == 100
+g = -2 * 10 * x2
+assert g.tolist() == [-20, -40, -80]
 wb = [Fr(int(a)) - Fr(1, 100) * int(b) for a, b in zip(w, g)]
-assert wb == [Fr(4, 100), Fr(208, 100), Fr(116, 100)]
-assert sum(Fr(int(a)) * b for a, b in zip(x2, wb)) == Fr(884, 100)
-assert (x2 @ x2) == 21 and 8 + Fr(2, 100) * 2 * 21 == Fr(884, 100)
+assert wb == [Fr(2, 10), Fr(104, 10), Fr(58, 10)]
+assert sum(Fr(int(a)) * b for a, b in zip(x2, wb)) == Fr(442, 10)
+assert (x2 @ x2) == 21 and 40 + Fr(2, 100) * 10 * 21 == Fr(442, 10)
 
 # Contoh Soal 1.3: bentuk matriks
 for w, yh_, e_, L_, Xte, grad in [
-        ([0, 2, 1], [3, 8, 10, 15], [0, 2, 2, 0], 2, [4, 12, 12],
-         [-2, -6, -6]),
-        ([1, 2, 1], [4, 9, 11, 16], [-1, 1, 1, -1], 1, [0, 0, 0],
+        ([0, 10, 5], [15, 40, 50, 75], [0, 10, 10, 0], 50, [20, 60, 60],
+         [-10, -30, -30]),
+        ([5, 10, 5], [20, 45, 55, 80], [-5, 5, 5, -5], 25, [0, 0, 0],
          [0, 0, 0])]:
     w = np.array(w)
     assert (Xt.astype(int) @ w).tolist() == yh_
@@ -46,8 +46,8 @@ for w, yh_, e_, L_, Xte, grad in [
     assert [Fr(-2, 4) * v for v in Xte] == grad
 
 # prosa: X~^T y, langkah pertama gradient descent
-assert (Xt.astype(int).T @ yi).tolist() == [40, 146, 142]
-assert np.allclose(0.02 * 0.5 * np.array([40, 146, 142]), [0.4, 1.46, 1.42])
+assert (Xt.astype(int).T @ yi).tolist() == [200, 730, 710]
+assert np.allclose(0.02 * 0.5 * np.array([200, 730, 710]), [2, 7.3, 7.1])
 # nilai eigen X~^T X~ dan faktor penyusutan
 G = Xt.T @ Xt
 # polinomial karakteristik (lam - 4)(lam^2 - 92 lam + 64)

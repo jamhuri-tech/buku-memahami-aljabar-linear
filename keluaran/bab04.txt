@@ -2,8 +2,8 @@
 # Diperiksa oleh periksa.py terhadap kode/bab04_*.py.
 
 === blok 1 ===
-(1) eliminasi buatan sendiri: [1. 2. 1.]
-    np.linalg.solve          : [1. 2. 1.]
+(1) eliminasi buatan sendiri: [ 5. 10.  5.]
+    np.linalg.solve          : [ 5. 10.  5.]
 
 === blok 2 ===
 (2) L =
@@ -17,9 +17,9 @@
 
 === blok 3 ===
 (3) tiga ruas kanan, satu LU:
-[[1. 2. 1.]
- [2. 4. 2.]
- [2. 2. 1.]]
+[[ 5. 10.  5.]
+ [10. 20. 10.]
+ [ 6. 10.  5.]]
 
 === blok 4 ===
 (4) tanpa pivot : [0. 1.]
@@ -32,4 +32,4 @@
  [1 0 0]
  [0 1 0]]
     L U = A: True   P L2 U2 = A: True
-    solusi: [1. 2. 1.]
+    solusi: [ 5. 10.  5.]

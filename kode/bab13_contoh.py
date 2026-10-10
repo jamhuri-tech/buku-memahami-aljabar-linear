@@ -15,12 +15,12 @@ assert (A + A.T).tolist() == [[4, 1], [1, 6]]
 w = np.array([1, -2])
 assert ((A + A.T) @ w).tolist() == [2, -11]
 assert 4 * 1 + (-2) == 2 and 1 + 6 * (-2) == -11
-wl = np.array([0, 2, 1])
+wl = np.array([0, 10, 5])
 g = -2 / 4 * Xt.T @ (y - Xt @ wl)
-assert np.allclose(g, [-2, -6, -6])
+assert np.allclose(g, [-10, -30, -30])
 
 # Contoh Soal 13.2: regresi logistik
-yb = (y >= 11).astype(int)
+yb = (y >= 55).astype(int)
 assert yb.tolist() == [0, 0, 1, 1]
 pmy = np.array([Fr(1, 2)] * 4) - yb
 assert [sum(c * d for c, d in zip(col, pmy)) for col in Xt.T] == [0, -3, -1]
@@ -45,13 +45,16 @@ x = np.array([2, 4])
 z = W1 @ x
 assert z.tolist() == [-2, 6]
 a = np.maximum(z, 0)
-yh = a.sum()
-assert a.tolist() == [0, 6] and yh == 6 and (yh - 10) ** 2 == 16
-d = 2 * (yh - 10)
-assert d == -8 and (d * a).tolist() == [0, -48]
-gz = d * np.ones(2) * (z > 0)
-assert gz.tolist() == [0, -8]
-assert np.outer(gz, x).tolist() == [[0, 0], [-16, -32]]
+w2 = np.array([5, 5])
+yh = w2 @ a
+assert y[1] == 50 and x.tolist() == X[1].tolist()
+assert a.tolist() == [0, 6] and yh == 30 and (yh - 50) ** 2 == 400
+d = 2 * (yh - 50)
+assert d == -40 and (d * a).tolist() == [0, -240]
+assert (d * w2).tolist() == [-200, -200]
+gz = d * w2 * (z > 0)
+assert gz.tolist() == [0, -200]
+assert np.outer(gz, x).tolist() == [[0, 0], [-400, -800]]
 
 # Contoh Soal 13.4: turunan log det
 A2 = np.array([[2, 1], [1, 3]])

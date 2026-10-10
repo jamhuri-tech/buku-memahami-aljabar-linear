@@ -31,11 +31,11 @@ print((q[:, None] + q[None, :] - 2 * K).astype(int))
 # (3) Ganti fitur: t = x1 + x2, d = x1 - x2
 W = np.array([[1, 1], [1, -1]])
 F = X @ W
-v = np.linalg.solve(W, [2, 1])
+v = np.linalg.solve(W, [10, 5])
 print("(3) X W =", F.astype(int).tolist())
 print("    bobot baru untuk (t, d):", v)
 print("    ramalan sama:",
-      np.allclose(1 + X @ [2, 1], 1 + F @ v))
+      np.allclose(5 + X @ [10, 5], 5 + F @ v))
 
 # (4) Lapisan linear pada satu batch
 rng = np.random.default_rng(20261010)

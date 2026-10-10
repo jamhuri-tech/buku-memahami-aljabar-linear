@@ -130,9 +130,9 @@ def bab01_data():
     lebar = 0.25
     idx = np.arange(4)
     for j, (kol, w) in enumerate([(X[:, 0], BIRU), (X[:, 1], HIJAU),
-                                  (y / 3, JINGGA)]):
+                                  (y / 15, JINGGA)]):
         a.bar(idx + (j - 1) * lebar, kol, lebar, color=w,
-              label=["$x_1$", "$x_2$", "$y/3$"][j])
+              label=["$x_1$", "$x_2$", "$y/15$"][j])
     a.set_xticks(idx, [f"{i + 1}" for i in idx])
     kunci_label(a, "x")
     a.set_xlabel("sampel $i$")
@@ -156,10 +156,10 @@ def bab01_turun():
     t = np.arange(len(L))
     fig, ax = plt.subplots(1, 2, figsize=(4.6, 2.0))
     a = ax[0]
-    a.semilogy(t[1:1600], L[1:1600] - 1, color=BIRU)
+    a.semilogy(t[1:1600], L[1:1600] - 25, color=BIRU)
     a.set_xlabel("iterasi $t$")
-    a.set_ylabel("$L(\\mathbf{w}^{(t)}) - 1$")
-    a.set_title("loss menuju minimum 1")
+    a.set_ylabel("$L(\\mathbf{w}^{(t)}) - 25$")
+    a.set_title("loss menuju minimum 25")
     _rapikan(a)
     a = ax[1]
     for j, (c, nama) in enumerate([(ABU, "$w_0$"), (BIRU, "$w_1$"),
@@ -167,7 +167,7 @@ def bab01_turun():
         a.plot(t, W[:, j], color=c, label=nama)
     a.set_xscale("symlog", linthresh=1)
     a.set_xlabel("iterasi $t$")
-    a.set_title("bobot menuju $(1, 2, 1)$")
+    a.set_title("bobot menuju $(5, 10, 5)$")
     a.legend(fontsize=6)
     _rapikan(a)
     fig.tight_layout()
@@ -454,24 +454,25 @@ def bab05_rentang():
 def bab05_lembah():
     X, y, _ = _mini()
     X3 = np.column_stack([np.ones(4), X, X.sum(1)])
-    w = np.array([1.0, 2, 1, 0])
+    w = np.array([5.0, 10, 5, 0])
     n = np.array([0.0, 1, 1, -1])
     d = np.array([0.0, 1, 0, 0])
-    t = np.linspace(-2, 2, 200)
+    t = np.linspace(-10, 10, 200)
     L = lambda v: np.mean((y - X3 @ v) ** 2)
-    fig, ax = plt.subplots(figsize=(3.4, 1.9))
+    fig, ax = plt.subplots(figsize=(3.4, 2.2))
     ax.plot(t, [L(w + s * n) for s in t], color=BIRU,
             label="arah ruang nol $(0\\;\\;1\\;\\;1\\;\\;-1)^\\top$")
     ax.plot(t, [L(w + s * d) for s in t], color=JINGGA,
             label="arah $w_1$ saja $(0\\;\\;1\\;\\;0\\;\\;0)^\\top$")
-    for s, c in [(0, ABU), (-1, HIJAU)]:
-        ax.plot(s, 1, "o", color=c, ms=3.5, zorder=3)
-    ax.text(-1.05, 1.9, "norma\nminimum", color=HIJAU, fontsize=6,
+    for s, c in [(0, ABU), (-5, HIJAU)]:
+        ax.plot(s, 25, "o", color=c, ms=3.5, zorder=3)
+    ax.text(-5.25, 47.5, "norma\nminimum", color=HIJAU, fontsize=6,
             ha="center")
-    ax.set_xlabel("langkah $t$ dari $\\mathbf{w} = (1\\;\\;2\\;\\;1\\;\\;0)^\\top$")
+    ax.set_xlabel("langkah $t$ dari $\\mathbf{w} = (5\\;\\;10\\;\\;5\\;\\;0)^\\top$")
     ax.set_ylabel("loss $L$")
-    ax.set_ylim(0, 12)
-    ax.legend(fontsize=6, loc="center right")
+    ax.set_ylim(0, 300)
+    ax.legend(fontsize=6, loc="upper center", bbox_to_anchor=(0.5, -0.32),
+              ncol=2, frameon=False)
     _rapikan(ax)
     simpan(fig, "bab05-lembah")
 
@@ -567,25 +568,25 @@ def bab08_cocok():
     yh = Xt @ w
     fig, ax = plt.subplots(1, 2, figsize=(4.6, 2.1))
     a = ax[0]
-    a.plot([2, 17], [2, 17], color=ABU_GARIS, lw=0.8)
+    a.plot([10, 85], [10, 85], color=ABU_GARIS, lw=0.8)
     for u, v in zip(yh, y):
         a.plot([u, u], [u, v], color=MERAH, lw=0.9)
     a.scatter(yh, y, color=BIRU, s=20, zorder=3)
-    a.axhline(10, color=ABU, lw=0.5, ls=":")
-    a.text(2.3, 10.4, "$\\bar{y} = 10$", fontsize=6.5, color=ABU)
+    a.axhline(50, color=ABU, lw=0.5, ls=":")
+    a.text(11.5, 52, "$\\bar{y} = 50$", fontsize=6.5, color=ABU)
     a.set_xlabel("ramalan $\\hat{y}$")
     a.set_ylabel("target $y$")
     a.set_title("galat: garis merah")
     a.set_aspect("equal")
     _rapikan(a)
     a = ax[1]
-    bag = [78, 74, 4]
+    bag = [1950, 1850, 100]
     a.bar([0, 1, 2], bag, color=[ABU, BIRU, MERAH], width=0.6)
     for i, v in enumerate(bag):
-        a.text(i, v + 1.5, str(v), ha="center", fontsize=7, color=ABU)
+        a.text(i, v + 37.5, str(v), ha="center", fontsize=7, color=ABU)
     a.set_xticks([0, 1, 2], ["SST", "SSR", "SSE"])
     kunci_label(a, "x")
-    a.set_ylim(0, 90)
+    a.set_ylim(0, 2250)
     a.set_title("SST = SSR + SSE")
     _rapikan(a)
     fig.tight_layout()
@@ -602,7 +603,7 @@ def bab08_ridge():
     ax.semilogx(lam, W[:, 0], color=BIRU, label="$w_1$")
     ax.semilogx(lam, W[:, 1], color=HIJAU, label="$w_2$")
     ax.axvline(2, color=ABU_GARIS, lw=0.6, ls="--")
-    ax.text(2.3, 2.05, "$\\lambda = 2$", fontsize=6.5, color=ABU)
+    ax.text(2.3, 10.25, "$\\lambda = 2$", fontsize=6.5, color=ABU)
     ax.set_xlabel("$\\lambda$")
     ax.set_ylabel("bobot ridge")
     ax.legend(fontsize=6.5)
@@ -835,9 +836,9 @@ def bab13_graf():
                "$(-2\\;\\;6)^\\top$"),
               (5.0, "$\\mathbf{a} = \\mathrm{ReLU}(\\mathbf{z})$",
                "$(0\\;\\;6)^\\top$"),
-              (7.1, "$\\hat{y} = \\mathbf{w}_2^\\top\\mathbf{a}$", "$6$"),
-              (9.2, "$L = (\\hat{y} - y)^2$", "$16$")]
-    mundur = ["", "$(0\\;\\;-8)^\\top$", "$(-8\\;\\;-8)^\\top$", "$-8$",
+              (7.1, "$\\hat{y} = \\mathbf{w}_2^\\top\\mathbf{a}$", "$30$"),
+              (9.2, "$L = (\\hat{y} - y)^2$", "$400$")]
+    mundur = ["", "$(0\\;\\;-200)^\\top$", "$(-200\\;\\;-200)^\\top$", "$-40$",
               "$1$"]
     for (x, nama, nilai), g in zip(simpul, mundur):
         ax.add_patch(plt.Rectangle((x - 0.85, 1.35), 1.7, 0.9,

@@ -11,7 +11,7 @@ X, y = X.astype(int), y.astype(int)
 x1, x2, one = X[:, 0], X[:, 1], np.ones(4, int)
 
 # Contoh Soal 2.1: kombinasi linear
-assert (1 * one + 2 * x1 + 1 * x2).tolist() == [4, 9, 11, 16]
+assert (5 * one + 10 * x1 + 5 * x2).tolist() == [20, 45, 55, 80]
 assert (x1 - x2).tolist() == [0, -2, 2, 0]
 
 # Gambar 2.1: v = (-2, 2)
@@ -30,11 +30,12 @@ assert 176 == 46 + 2 * 42 + 46
 
 # Contoh Soal 2.3: kosinus dan korelasi
 assert Fr(42, 46) == Fr(21, 23) and round(21 / 23, 3) == 0.913
-c1, c2, yc = x1 - 3, x2 - 3, y - 10
-assert yc.tolist() == [-7, 0, 2, 5] and yc @ yc == 78
+c1, c2, yc = x1 - 3, x2 - 3, y - 50
+assert yc.tolist() == [-35, 0, 10, 25] and yc @ yc == 1950
 assert c1 @ c2 == 6 and c1 @ c1 == 10 and c2 @ c2 == 10
 assert round(math.degrees(math.acos(0.6)), 2) == 53.13
-assert c1 @ yc == 26 and c2 @ yc == 22
+assert c1 @ yc == 130 and c2 @ yc == 110
+assert Fr(130 ** 2, 10 * 1950) == Fr(26 ** 2, 780)
 assert round(26 / math.sqrt(780), 4) == 0.9309
 assert round(22 / math.sqrt(780), 4) == 0.7877
 assert np.isclose(np.corrcoef(x1, y)[0, 1], 26 / math.sqrt(780))

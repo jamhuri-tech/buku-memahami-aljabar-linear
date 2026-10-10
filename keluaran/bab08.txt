@@ -2,26 +2,26 @@
 # Diperiksa oleh periksa.py terhadap kode/bab08_*.py.
 
 === blok 1 ===
-(1) persamaan normal: [1. 2. 1.]
-    QR              : [1. 2. 1.]
-    lstsq           : [1. 2. 1.]
-    LinearRegression: [1. 2. 1.]
+(1) persamaan normal: [ 5. 10.  5.]
+    QR              : [ 5. 10.  5.]
+    lstsq           : [ 5. 10.  5.]
+    LinearRegression: [ 5. 10.  5.]
 
 === blok 2 ===
-(2) SST = 78.0000  SSR = 74.0000  SSE = 4.0000
+(2) SST = 1950.0000  SSR = 1850.0000  SSE = 100.0000
     R^2 = 0.948718  korelasi(y, yhat)^2 = 0.948718
 
 === blok 3 ===
 (4) sisa x2 sesudah 1 dan x1: [-0.8  1.6 -1.6  0.8]
-    w2 = r^T y / r^T r = 1.0000
+    w2 = r^T y / r^T r = 5.0000
 
 === blok 4 ===
-(3) sigma^2 = 4.0000  galat baku: [2.3452 0.7906 0.7906]
-    statsmodels         : [2.3452 0.7906 0.7906]
+(3) sigma^2 = 100.0000  galat baku: [11.726   3.9528  3.9528]
+    statsmodels         : [11.726   3.9528  3.9528]
 
 === blok 5 ===
 (5) lambda   w1       w2      (rumus)  sklearn Ridge
-       0.0   2.0000   1.0000    [2. 1.]
-       2.0   1.6667   1.0000    [1.6667 1.    ]
-      10.0   1.0659   0.7802    [1.0659 0.7802]
-     100.0   0.2261   0.1877    [0.2261 0.1877]
+       0.0  10.0000   5.0000    [10.  5.]
+       2.0   8.3333   5.0000    [8.3333 5.    ]
+      10.0   5.3297   3.9011    [5.3297 3.9011]
+     100.0   1.1306   0.9383    [1.1306 0.9383]

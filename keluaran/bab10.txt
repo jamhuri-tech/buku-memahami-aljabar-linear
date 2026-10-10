@@ -21,7 +21,7 @@
  [6.     3.1623 0.    ]
  [6.     1.8974 2.5298]]
     L = R^T dari QR (sampai tanda): True
-    w lewat cho_solve: [1. 2. 1.]
+    w lewat cho_solve: [ 5. 10.  5.]
 
 === blok 4 ===
 (4) kovarians = [[2.5, 1.5], [1.5, 2.5]]
